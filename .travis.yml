@@ -1,0 +1,14 @@
+language: cpp
+compiler:
+  - gcc
+  - clang
+before_script:
+  - mkdir ../build
+  - cd ../build
+script:
+  - cmake ../3817061_Nechaeva_AllLabe
+  - make -j
+  - cd ./bin/
+  - ./AllLabe
+notifications:
+  email: false
