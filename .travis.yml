@@ -8,6 +8,6 @@ before_script:
 script:
   - cmake ../3817061_Nechaeva_AllLabe
   - make -j
-  - ./AllLabe
+  - cd ./vector
 notifications:
   email: false
