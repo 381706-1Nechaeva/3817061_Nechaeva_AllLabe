@@ -2,7 +2,7 @@
 #include <iostream>
 #include <math.h>
 
-template <class T>
+template <typename T>
 
 class TVector
 {
@@ -34,9 +34,9 @@ public:
 	T GelderNorm(int p);
 	T InfNorm();
 
-	template <class T>
+	template <typename T>
 	friend std::istream& operator>>(std::istream& A, TVector<T>& B);
-	template <class T>
+	template <typename T>
 	friend std::ostream& operator<<(std::ostream& A, TVector<T>& B);
 };
 // ---------------------------------------------------------------------------
