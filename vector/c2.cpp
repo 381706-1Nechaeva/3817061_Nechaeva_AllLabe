@@ -3,7 +3,7 @@
 
 #include "vector.h"
 
-void main()
+int main()
 {
 	float a[3] = { 1.1, 2.4, 3.4 };
 	float b[3] = { 0.55, 1.2, 1.7 };
@@ -20,4 +20,5 @@ void main()
 	TVector<float> Del;
 	std::cout << A << "\n" << B << "\n" << C << "\n" << D << "\n";
 
+	return 0;
 }
