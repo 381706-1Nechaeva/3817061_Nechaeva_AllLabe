@@ -1,142 +1,94 @@
 #pragma once
 #include <iostream>
 #include <math.h>
-
+using namespace std;
 template <class T>
 
 class TVector
 {
 protected:
 	T* vector;
-	int dlina;
+	int size; //размер вектора
+	int FirstInd; // начальный индекс вектора
 public:
-	TVector();
-	TVector(TVector &A);
-	TVector(T* s, int _dlina);
+	TVector(const TVector &A); //конструктор копирования
+	TVector(int _size = 10, int _FirstInd=0 ); //конструктор инициализацции
 	~TVector();
+	int GetSize(); // размер вектора
+	int GetFirstInd(); // индекс первого элемента вектора
+	TVector<T>& operator=(TVector<T> &A); //присваивание
+	T& operator[](int i); //индексация
+	bool operator==(TVector<T> &A); //сравнение
+	bool operator!=(TVector<T> &A); //сравнение
+	//Скалярные вычисления
+	TVector<T> operator*(const T a); //умножение на число
+	TVector<T> operator+(const T a); //сложить число
+	TVector<T> operator-(const T a); //вычесть число
+	//Векторные вычисления
+	TVector<T> operator+(TVector<T> &A); //сложение
+	TVector<T> operator-(TVector<T> &A); //вычитание
+	TVector<T> operator*(TVector<T> &A); //умножение
 
-	int GetDlina();
-	TVector<T>& DeleteVector();
-	TVector<T>& Transform(int n);
-
-	TVector<T> operator+(TVector<T> &A);
-	TVector<T> operator-(TVector<T> &A);
-	T operator*(TVector<T> &A);
-	TVector<T> operator*(T a);
-	TVector<T> operator/(T a);
-	TVector<T>& operator=(TVector<T> &A);
-	T& operator[](int i);
-
-	TVector<T>& Sort();
-	TVector<T>& Norm();
-	T OneNorm();
-	T TwoNorm();
-	T GelderNorm(int p);
-	T InfNorm();
-
-	template <class T1>
-	friend std::istream& operator>>(std::istream& A, TVector<T1>& B);
-	template <class T1>
-	friend std::ostream& operator<<(std::ostream& A, TVector<T1>& B);
+	friend istream &operator>>(istream& A, TVector& B)
+	{
+		for (int i = 0; i < B.size; i++)
+			A >> B.vector[i];
+		return A;
+	}
+	friend ostream &operator<<(ostream& A, TVector& B)
+	{
+		for (int i = 0; i < B.size; i++)
+			A << B.vector[i]<<"\t";
+		return A;
+	}
 };
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T>::TVector()
+TVector<T>::TVector(int _size, int _FirstInd)
 {
-	vector = 0;
-	dlina = 0;
+	if (_size <= 0)
+		throw -1;
+	if ((_FirstInd < 0) || (_FirstInd >= _size))
+		throw -1;
+	size = _size - _FirstInd;
+	FirstInd = _FirstInd;
+	vector = new T[size];
 }
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T>::TVector(TVector &A)
+TVector<T>::TVector(const TVector &A)
 {
-	dlina = A.dlina;
-	if (dlina != 0)
+	size = A.size;
+	FirstInd=A.FirstInd;
+	if (size != 0)
 	{
-		vector = new T[dlina];
-		for (int i = 0; i < dlina; i++)
+		vector = new T[size];
+		for (int i = 0; i < size; i++)
 			vector[i] = A.vector[i];
 	}
 	else
 		vector = 0;
 }
-// ---------------------------------------------------------------------------
-template <class T>
-TVector<T>::TVector(T* s, int _dlina)
-{
-	dlina = _dlina;
-	vector = new T[dlina];
-	for (int i = 0; i < dlina; i++)
-		vector[i] = s[i];
-}
+
 // ---------------------------------------------------------------------------
 template <class T>
 TVector<T>::~TVector()
 {
-	dlina = 0;
+	size = 0;
 	if (vector != 0)
 		delete[]vector;
 }
 // ---------------------------------------------------------------------------
 template <class T>
-int TVector<T>::GetDlina()
+int TVector<T>::GetSize()
 {
-	return dlina;
+	return size;
 }
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T>& TVector<T>::DeleteVector()
+int TVector<T>::GetFirstInd()
 {
-	dlina = 0;
-	if (vector != 0)
-		delete[]vector;
-	return *this;
-}
-// ---------------------------------------------------------------------------
-template <class T>
-TVector<T>& TVector<T>::Transform(int n)
-{
-	/*if (n > 0)
-	dlina = dlina + n;
-	if ((n < 0) && (dlina > n))
-	dlina = dlina - n;
-	if (dlina - n == 0)
-	{
-	dlina = 0;
-	vector = 0;
-	}
-	if (dlina - n < 0)
-	throw 1;*/
-	if (n > 0)
-	{
-		T* buff = 0;
-		int _dlina = dlina;
-		dlina = dlina + n;
-		buff = new T[dlina];
-		for (int i = 0; i < _dlina; i++)
-			buff[i] = vector[i];
-		for (int i = _dlina; i < dlina; i++)
-			buff[i] = 0;
-		delete[]vector;
-		vector = new T[dlina];
-		for (int i = 0; i < dlina; i++)
-			vector[i] = buff[i];
-		delete[]buff;
-	}
-	if ((n < 0) && (dlina > n))
-	{
-		T* buff = 0;
-		dlina = dlina - n;
-		buff = new T[dlina];
-		for (int i = 0; i < dlina; i++)
-			buff[i] = vector[i];
-		delete[]vector;
-		vector = new T[dlina];
-		for (int i = 0; i < dlina; i++)
-			vector[i] = buff[i];
-		delete[]buff;
-	}
-	return *this;
+	return FirstInd;
 }
 // ---------------------------------------------------------------------------
 template <class T>
@@ -164,34 +116,34 @@ template <class T>
 TVector<T> TVector<T>::operator-(TVector<T> &A)
 {
 	TVector<T> S;
-	if (dlina == A.dlina)
+	if (size == A.size)
 	{
-		if (dlina == 0)
+		if (size == 0)
 			S.vector = 0;
 		else
 		{
-			S.dlina = dlina;
-			S.vector = new T[dlina];
-			for (int i = 0; i < dlina; i++)
+			S.size = size;
+			S.vector = new T[size];
+			for (int i = 0; i < size; i++)
 				S.vector[i] = vector[i] - A.vector[i];
 		}
 	}
 	else
-		throw 1;
+		throw -1;
 	return S;
 }
 // ---------------------------------------------------------------------------
 template <class T>
-T TVector<T>::operator*(TVector<T> &A)
+TVector<T> TVector<T>::operator*(TVector<T> &A)
 {
 	T summ = 0;
-	if (dlina == A.dlina)
+	if (size == A.size)
 	{
-		if (dlina == 0)
+		if (size == 0)
 			return summ;
 		else
 		{
-			for (int i = 0; i < dlina; i++)
+			for (int i = 0; i < size; i++)
 				summ += vector[i] * A.vector[i];
 		}
 	}
@@ -201,36 +153,17 @@ T TVector<T>::operator*(TVector<T> &A)
 }
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T> TVector<T>::operator*(T a)
+TVector<T> TVector<T>::operator*(const T a)
 {
 	TVector<T> S;
-	if (dlina == 0)
+	if (size == 0)
 		S.vector = 0;
 	else
 	{
-		S.dlina = dlina;
-		S.vector = new T[dlina];
-		for (int i = 0; i < dlina; i++)
+		S.size = size;
+		S.vector = new T[size];
+		for (int i = 0; i < size; i++)
 			S.vector[i] = vector[i] * a;
-	}
-	return S;
-}
-// ---------------------------------------------------------------------------
-template <class T>
-TVector<T> TVector<T>::operator/(T a)
-{
-	TVector<T> S;
-	if (a != 0)
-	{
-		if (dlina == 0)
-			S.vector = 0;
-		else
-		{
-			S.dlina = dlina;
-			S.vector = new T[dlina];
-			for (int i = 0; i < dlina; i++)
-				S.vector[i] = vector[i] / a;
-		}
 	}
 	return S;
 }
@@ -240,21 +173,16 @@ TVector<T>& TVector<T>::operator=(TVector<T> &A)
 {
 	if (this != &A)
 	{
-		dlina = A.dlina;
-		if (dlina != 0)
-		{
-			if (vector != 0)
-				delete[]vector;
-			vector = new T[dlina];
-			for (int i = 0; i < dlina; i++)
-				vector[i] = A.vector[i];
-		}
-		else
-		{
-			if (vector != 0)
-				delete[]vector;
-			vector = 0;
-		}
+		size = A.size;
+		FirstInd=A.FirstInd
+			if (size != 0)
+			{
+				if (vector != 0)
+					delete[]vector;
+				vector = new T[size];
+				for (int i = 0; i < size; i++)
+					vector[i] = A.vector[i];
+			}
 	}
 	return *this;
 }
@@ -264,127 +192,7 @@ T& TVector<T>::operator[](int i)
 {
 	if (i >= 0 && i <= dlina)
 		return vector[i];
-	throw 1;
-}
-// ---------------------------------------------------------------------------
-template <class T>
-std::istream& operator>>(std::istream &A, TVector<T> &B)
-{
-	A >> B.dlina;
-	B.vector = new T[B.dlina];
-	for (int i = 0; i < B.dlina; i++)
-	{
-		A >> B.vector[i];
-	}
-	return A;
-}
-// ---------------------------------------------------------------------------
-template <class T>
-std::ostream& operator<<(std::ostream &A, TVector<T> &B)
-{
-	A << B.dlina << "\n";
-	for (int i = 0; i < B.dlina; i++)
-		A << B.vector[i] << "\n";
-	return A;
-}
-// ---------------------------------------------------------------------------
-template <class T>
-TVector<T>& TVector<T>::Sort()
-{
-	if (dlina != 0)
-	{
-		for (int i = 0; i < dlina - 1; i++)
-		{
-			T min = vector[i];
-			int ind = i;
-			for (int j = i + 1; j < dlina; j++)
-			{
-				if (vector[ind] > vector[j])
-				{
-					min = vector[j];
-					ind = j;
-				}
-			}
-			if (i != ind)
-			{
-				T tmp = vector[i];
-				vector[i] = vector[ind];
-				vector[ind] = tmp;
-			}
-		}
-	}
-	return *this;
-}
-// ---------------------------------------------------------------------------
-template <class T>
-TVector<T>& TVector<T>::Norm()
-{
-	if (dlina != 0)
-	{
-		T summ = 0;
-		for (int i = 0; i < dlina; i++)
-			summ += pow(vector[i], 2);
-		for (int i = 0; i < dlina; i++);
-		//   vector[i] = vector[i] / pow(summ, 0.5);
-	}
-	return *this;
-}
-// ---------------------------------------------------------------------------
-template <class T>
-T TVector<T>::OneNorm()
-{
-	if (dlina != 0)
-	{
-		T rez = 0;
-		for (int i = 0; i < dlina; i++)
-			rez += vector[i];
-		return rez;
-	}
 	else
-		return 0;
+		throw -1;
 }
-// ---------------------------------------------------------------------------
-template <class T>
-T TVector<T>::TwoNorm()
-{
-	if (dlina != 0)
-	{
-		T rez = 0;
-		for (int i = 0; i < dlina; i++)
-			rez += vector[i] * vector[i];
-		rez = sqrt(rez);
-		return rez;
-	}
-	else
-		return 0;
-}
-// ---------------------------------------------------------------------------
-template <class T>
-T TVector<T>::InfNorm()
-{
-	if (dlina != 0)
-	{
-		T max = vector[0];
-		for (int i = 1; i < dlina; i++)
-			if (max < vector[i])
-				max = vector[i];
-		return max;
-	}
-	else
-		return 0;
-}
-// ---------------------------------------------------------------------------
-template <class T>
-T TVector<T>::GelderNorm(int p)
-{
-	if (dlina != 0)
-	{
-		T rez = 0, summ = 0;
-		for (int i = 0; i < dlina; i++)
-			summ += pow(vector[i], p);
-		//      rez = pow(summ, 1.0/p);
-		return rez;
-	}
-	else
-		return 0;
-}
+
