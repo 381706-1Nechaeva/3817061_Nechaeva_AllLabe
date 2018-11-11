@@ -174,7 +174,7 @@ TVector<T>& TVector<T>::operator=(TVector<T> &A)
 	if (this != &A)
 	{
 		size = A.size;
-		FirstInd=A.FirstInd
+		FirstInd=A.FirstInd;
 			if (size != 0)
 			{
 				if (vector != 0)
@@ -190,7 +190,7 @@ TVector<T>& TVector<T>::operator=(TVector<T> &A)
 template <class T>
 T& TVector<T>::operator[](int i)
 {
-	if (i >= 0 && i <= dlina)
+	if (i >= 0 && i <= size)
 		return vector[i];
 	else
 		throw -1;
