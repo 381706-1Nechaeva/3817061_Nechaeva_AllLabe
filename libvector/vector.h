@@ -95,15 +95,15 @@ template <class T>
 TVector<T> TVector<T>::operator+(TVector<T> &A)
 {
 	TVector<T> S;
-	if (dlina == A.dlina)
+	if (size == A.size)
 	{
-		if (dlina == 0)
+		if (size == 0)
 			S.vector = 0;
 		else
 		{
-			S.dlina = dlina;
-			S.vector = new T[dlina];
-			for (int i = 0; i < dlina; i++)
+			S.size = size;
+			S.vector = new T[size];
+			for (int i = 0; i < size; i++)
 				S.vector[i] = vector[i] + A.vector[i];
 		}
 	}
