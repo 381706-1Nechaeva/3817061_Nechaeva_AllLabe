@@ -11,8 +11,8 @@ protected:
 	int size; //размер вектора
 	int FirstInd; // начальный индекс вектора
 public:
-	TVector(const TVector &A); //конструктор копирования
-	TVector(int _size = 10, int _FirstInd=0 ); //конструктор инициализацции
+	TVector( TVector &A); //конструктор копирования
+	TVector(int _size = 5, int _FirstInd=0 ); //конструктор инициализацции
 	~TVector();
 	int GetSize(); // размер вектора
 	int GetFirstInd(); // индекс первого элемента вектора
@@ -21,9 +21,9 @@ public:
 	bool operator==(TVector<T> &A); //сравнение
 	bool operator!=(TVector<T> &A); //сравнение
 	//Скалярные вычисления
-	TVector<T> operator*(const T a); //умножение на число
-	TVector<T> operator+(const T a); //сложить число
-	TVector<T> operator-(const T a); //вычесть число
+	TVector<T> operator*( T a); //умножение на число +
+	TVector<T> operator+( T a); //сложить число + 
+	TVector<T> operator-( T a); //вычесть число +
 	//Векторные вычисления
 	TVector<T> operator+(TVector<T> &A); //сложение
 	TVector<T> operator-(TVector<T> &A); //вычитание
@@ -39,6 +39,7 @@ public:
 	{
 		for (int i = 0; i < B.size; i++)
 			A << B.vector[i]<<"\t";
+		A << "\n";
 		return A;
 	}
 };
@@ -56,7 +57,7 @@ TVector<T>::TVector(int _size, int _FirstInd)
 }
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T>::TVector(const TVector &A)
+TVector<T>::TVector(TVector &A)
 {
 	size = A.size;
 	FirstInd=A.FirstInd;
@@ -153,7 +154,7 @@ TVector<T> TVector<T>::operator*(TVector<T> &A)
 }
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T> TVector<T>::operator*(const T a)
+TVector<T> TVector<T>::operator*(T a)
 {
 	TVector<T> S;
 	if (size == 0)
@@ -164,6 +165,38 @@ TVector<T> TVector<T>::operator*(const T a)
 		S.vector = new T[size];
 		for (int i = 0; i < size; i++)
 			S.vector[i] = vector[i] * a;
+	}
+	return S;
+}
+// ---------------------------------------------------------------------------
+template <class T>
+TVector<T> TVector<T>::operator+(T a)
+{
+	TVector<T> S;
+	if (size == 0)
+		S.vector = 0;
+	else
+	{
+		S.size = size;
+		S.vector = new T[size];
+		for (int i = 0; i < size; i++)
+			S.vector[i] = vector[i] + a;
+	}
+	return S;
+}
+// ---------------------------------------------------------------------------
+template <class T>
+TVector<T> TVector<T>::operator-(T a)
+{
+	TVector<T> S;
+	if (size == 0)
+		S.vector = 0;
+	else
+	{
+		S.size = size;
+		S.vector = new T[size];
+		for (int i = 0; i < size; i++)
+			S.vector[i] = vector[i] - a;
 	}
 	return S;
 }
@@ -195,4 +228,69 @@ T& TVector<T>::operator[](int i)
 	else
 		throw -1;
 }
+// ---------------------------------------------------------------------------
+template <class T>
+bool TVector<T>:: operator==(TVector<T> &A)
+{
+	int res=0;
+	if( size == A.size)
+	{
+		for(int i = 0;i < size;i++)
+		{
+			if(vector[i] == A.vector[i])
+				res=1;
+		}
+	}
+	else return res;
+	return res;
+}
+// ---------------------------------------------------------------------------
+template <class T>
+bool TVector<T>:: operator!=(TVector<T> &A)
+{
+	
+	return !(*this==A);
+}
+
+template <class T>
+
+class TMatrix : public TVector <TVector<T> >
+{
+public:
+	TMatrix(int _n = 3);
+	TMatrix(TMatrix &A);
+	TMatrix(TVector<TVector<T> > &A);
+	bool operator==(TMatrix &A);// сравнение
+    TMatrix& operator= (TMatrix &A);// присваивание
+    TMatrix operator+ (TMatrix &A);// сложение
+    TMatrix operator- (TMatrix &A);// вычитание
+    TMatrix operator* (TMatrix &A);// умножение
+	
+	//ввод/вывод в поток
+
+	friend istream &operator>>(istream& A, TMatrix& B)
+	{
+		for (int i = 0; i < B.size; i++)
+			A >> B.vector[i];
+		return A;
+	}
+	friend ostream &operator<<(ostream& A, TMatrix& B)
+	{
+		for( int j=0;j<B.size;j++)
+		{
+			A << B.vector[j]<<"\n";
+		}
+		return A;
+	}
+};
+//............................................................
+template <class T> 
+TMatrix<T>::TMatrix(int _n): TVector<TVector<T> >(_n)
+{
+    for(int i=0; i < _n; i++)
+        this->vector[i]= TVector<T>(_n,i);
+}
+
+
+
 
