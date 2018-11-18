@@ -290,7 +290,7 @@ TMatrix<T>::TMatrix(int _n): TVector<TVector<T> >(_n)
     if (_n<1)
 		throw 1;
 	for(int i=0; i < _n; i++)
-        this->vector[i]= TVector<T>(_n,i);
+        (*this).vector[i]= TVector<T>(_n,i);
 }
 
 
