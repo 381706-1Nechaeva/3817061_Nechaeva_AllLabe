@@ -23,7 +23,7 @@ int main()
 
 	//return 0;
 	TMatrix<int> D;
-	std:: cin >> D;
-	std:: cout << D;
+	cin >> D;
+	cout << D;
 	return 0;
 }
