@@ -11,23 +11,23 @@ protected:
 	int size; //размер вектора
 	int FirstInd; // стартовый индекс
 public:
-	TVector(const TVector &A); //конструктор копирования
+	TVector(const TVector<T> &A); //конструктор копирования
 	TVector(int _size = 5, int _FirstInd = 0); //конструктор инициализации
 	~TVector();
 	int GetSize(); // получить размер вектора
 	int GetFirstInd(); // получить стартовый индекс
-	TVector<T>& operator=(const TVector &A); //присваивание
+	TVector<T>& operator=(const TVector<T> &A); //присваивание
 	T& operator[](int i); //индексация
-	bool operator==(const TVector &A); //сравнение
-	bool operator!=(const TVector &A); //сравнение
+	bool operator==(const TVector<T> &A); //сравнение
+	bool operator!=(const TVector<T> &A); //сравнение
 	//скалярные операции
 	TVector<T> operator*(const T &a); // умножение на число
 	TVector<T> operator+(const T &a); //прибавление числа
 	TVector<T> operator-(const T &a); //вычитание числа
 	//векторные операции
-	TVector<T> operator+(const TVector &A); //сложение
-	TVector<T> operator-(const TVector &A); //вычитание
-	TVector<T> operator*(const TVector &A); //умножение
+	TVector<T> operator+(const TVector<T> &A); //сложение
+	TVector<T> operator-(const TVector<T> &A); //вычитание
+	TVector<T> operator*(const TVector<T> &A); //умножение
 
 	friend istream &operator>>(istream& A, TVector& B)
 	{
@@ -57,7 +57,7 @@ TVector<T>::TVector(int _size, int _FirstInd)
 }
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T>::TVector(const TVector &A)
+TVector<T>::TVector(const TVector<T> &A)
 {
 	size = A.size;
 	FirstInd = A.FirstInd;
@@ -93,7 +93,7 @@ int TVector<T>::GetFirstInd()
 }
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T> TVector<T>::operator+(const TVector &A)
+TVector<T> TVector<T>::operator+(const TVector<T> &A)
 {
 	TVector<T> S;
 	if (size == A.size)
@@ -114,7 +114,7 @@ TVector<T> TVector<T>::operator+(const TVector &A)
 }
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T> TVector<T>::operator-(const TVector &A)
+TVector<T> TVector<T>::operator-(const TVector<T> &A)
 {
 	TVector<T> S;
 	if (size == A.size)
@@ -135,7 +135,7 @@ TVector<T> TVector<T>::operator-(const TVector &A)
 }
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T> TVector<T>::operator*(const TVector &A)
+TVector<T> TVector<T>::operator*(const TVector<T> &A)
 {
 	T summ = 0;
 	if (size == A.size)
@@ -202,7 +202,7 @@ TVector<T> TVector<T>::operator-(const T &a)
 }
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T>& TVector<T>::operator=(const TVector &A)
+TVector<T>& TVector<T>::operator=(const TVector<T> &A)
 {
 	if (this != &A)
 	{
@@ -230,7 +230,7 @@ T& TVector<T>::operator[](int i)
 }
 // ---------------------------------------------------------------------------
 template <class T>
-bool TVector<T>:: operator==(const TVector &A)
+bool TVector<T>:: operator==(const TVector<T> &A)
 {
 	int res = 1;
 	if (size == A.size)
@@ -248,7 +248,7 @@ bool TVector<T>:: operator==(const TVector &A)
 }
 // ---------------------------------------------------------------------------
 template <class T>
-bool TVector<T>:: operator!=(const TVector &A)
+bool TVector<T>:: operator!=(const TVector<T> &A)
 {
 
 	return !(*this == A);
@@ -260,14 +260,14 @@ class TMatrix : public TVector <TVector<T> >
 {
 public:
 	TMatrix(int _n = 3);
-	TMatrix(const TMatrix  &A);
+	TMatrix(const TMatrix<T>  &A);
 	TMatrix(const TVector<TVector<T> > &A);
-	bool operator==(const TMatrix &A); //сравнение
-	bool operator!=(const TMatrix &A); //сравнение
-	TMatrix& operator=(const TMatrix &A); // 
-	TMatrix operator+(const TMatrix &A); // 
-	TMatrix operator-(const TMatrix &A); // 
-	//TMatrix operator*(TMatrix<T> &A); // 
+	bool operator==(const TMatrix<T> &A); //сравнение
+	bool operator!=(const TMatrix<T> &A); //сравнение
+	TMatrix& operator=(const TMatrix<T> &A); //присваивание
+	TMatrix operator+(const TMatrix<T> &A); //сложение матриц
+	TMatrix operator-(const TMatrix<T> &A); // вычитание
+	TMatrix operator*(const TMatrix<T> &A); // умножение матриц
 
 	//ввод/вывод в поток
 
@@ -297,7 +297,7 @@ TMatrix<T>::TMatrix(int _n) : TVector<TVector<T> >(_n)
 }
 //............................................................
 template <class T>
-TMatrix<T>::TMatrix(const TMatrix &A) : TVector<TVector<T> >(A)
+TMatrix<T>::TMatrix(const TMatrix<T> &A) : TVector<TVector<T> >(A)
 {
 }
 //............................................................
@@ -307,19 +307,19 @@ TMatrix<T>::TMatrix(const TVector<TVector<T> > & A) : TVector<TVector<T> >(A)
 }
 //............................................................
 template <class T>
-bool TMatrix<T>::operator==(const TMatrix &A)
+bool TMatrix<T>::operator==(const TMatrix<T> &A)
 {
 	return TVector<TVector<T> >:: operator==(A);
 }
 //............................................................
 template <class T>
-bool TMatrix<T>::operator!=(const TMatrix &A)
+bool TMatrix<T>::operator!=(const TMatrix<T> &A)
 {
 	return !(*this == A);
 }
 //............................................................
 template <class T>
-TMatrix<T>& TMatrix<T>::operator=(const TMatrix &A)
+TMatrix<T>& TMatrix<T>::operator=(const TMatrix<T> &A)
 {
 	if (this != &A)
 	{
@@ -338,13 +338,18 @@ TMatrix<T>& TMatrix<T>::operator=(const TMatrix &A)
 }
 //............................................................
 template <class T>
-TMatrix<T> TMatrix<T>::operator+(const TMatrix &A)
+TMatrix<T> TMatrix<T>::operator+(const TMatrix<T> &A)
 {
 	return TVector<TVector<T> >::operator+(A);
 }
 //............................................................
 template <class T>
-TMatrix<T> TMatrix<T>::operator-(const TMatrix &A)
+TMatrix<T> TMatrix<T>::operator-(const TMatrix<T> &A)
 {
 	return TVector<TVector<T> >::operator-(A);
+}
+//............................................................
+template <class T>
+TMatrix<T> TMatrix<T>::operator*(const TMatrix<T> &A)
+{
 }
