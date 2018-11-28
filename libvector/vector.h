@@ -77,7 +77,7 @@ TVector<T>::~TVector()
 {
 	size = 0;
 	if (vector != 0)
-		delete[]vector;
+		delete[] vector;
 }
 // ---------------------------------------------------------------------------
 template <class T>
@@ -223,10 +223,10 @@ TVector<T>& TVector<T>::operator=(const TVector<T> &A)
 template <class T>
 T& TVector<T>::operator[](int i)
 {
-	if (i >= 0 && i <= size)
-		return vector[i];
-	else
-		throw - 1;
+	//if (i >= 0 && i <= size)
+		return vector[i-FirstInd];
+	//else
+		//throw - 1;
 }
 // ---------------------------------------------------------------------------
 template <class T>
@@ -281,6 +281,8 @@ public:
 	{
 		for (int j = 0; j < B.size; j++)
 		{
+			for (int i = 0; i < B.vector[j].GetFirstInd(); i++)
+				A << "\t";
 			A << B.vector[j] << "\n";
 		}
 		return A;
@@ -352,4 +354,27 @@ TMatrix<T> TMatrix<T>::operator-(const TMatrix<T> &A)
 template <class T>
 TMatrix<T> TMatrix<T>::operator*(const TMatrix<T> &A)
 {
+	TMatrix<T> temp(this->size);
+	if (this->size == A.size)
+	{
+		for (int i = 0; i < temp.size; i++)
+		{
+			for (int j = i; j < temp.size; j++)
+			{
+
+				temp.vector[i][j] = 0;
+				for (int k = 0; k < A.vector[j].GetFirstInd()+1; k++)
+				{
+					if ((j >= A.vector[j].GetFirstInd()) && (k >= A.vector[i].GetFirstInd()))
+					{
+						temp.vector[i][j] += this->vector[i][k] * A.vector[k][j];
+					}
+				}
+			}
+		}
+				
+	}
+	else
+		throw 1;
+	return temp;
 }

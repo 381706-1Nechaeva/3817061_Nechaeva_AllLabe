@@ -21,12 +21,12 @@ int main()
 
 
 	//return 0;
-	TMatrix<int> D(2);
+	TMatrix<int> D(3);
 	TMatrix<int> F(D), C(D);
 	cout << "Vvedite matrizy s razmerom = " << F.GetSize() << "\n";
 	cin >> F;
 	D = F;
-	C = D + F;
+	C = D * F;
 	cout << C;
 	/*if (D != F)
 		cout << "net";
