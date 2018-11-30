@@ -27,7 +27,7 @@ public:
 	//векторные операции
 	TVector<T> operator+(const TVector<T> &A); //сложение
 	TVector<T> operator-(const TVector<T> &A); //вычитание
-	TVector<T> operator*(const TVector<T> &A); //умножение
+	T operator*(const TVector<T> &A); //умножение
 
 	friend istream &operator>>(istream& A, TVector& B)
 	{
@@ -47,13 +47,29 @@ public:
 template <class T>
 TVector<T>::TVector(int _size, int _FirstInd)
 {
-	if (_size <= 0)
+	if (_size < 0)
 		throw - 1;
-	if ((_FirstInd < 0) || (_FirstInd >= _size))
-		throw - 1;
-	size = _size - _FirstInd;
-	FirstInd = _FirstInd;
-	vector = new T[size];
+	else
+	{
+		if (_size == 0)
+		{
+			size = _size;
+			vector = NULL;
+		}
+		else
+		{
+			if ((_FirstInd < 0) || (_FirstInd >= _size))
+				throw - 1;
+			else
+			{
+				size = _size - _FirstInd;
+				FirstInd = _FirstInd;
+				vector = new T[size];
+				for (int i = 0; i < size; i++)
+					vector[i] = 0;
+			}
+		}
+	}
 }
 // ---------------------------------------------------------------------------
 template <class T>
@@ -135,7 +151,7 @@ TVector<T> TVector<T>::operator-(const TVector<T> &A)
 }
 // ---------------------------------------------------------------------------
 template <class T>
-TVector<T> TVector<T>::operator*(const TVector<T> &A)
+T TVector<T>::operator*(const TVector<T> &A)
 {
 	T summ = 0;
 	if (size == A.size)
@@ -223,10 +239,10 @@ TVector<T>& TVector<T>::operator=(const TVector<T> &A)
 template <class T>
 T& TVector<T>::operator[](int i)
 {
-	//if (i >= 0 && i <= size)
-		return vector[i-FirstInd];
-	//else
-		//throw - 1;
+	if ((i < 0) || (i >= size + FirstInd))
+		throw - 1;
+	else
+		return vector[i - FirstInd];
 }
 // ---------------------------------------------------------------------------
 template <class T>
@@ -243,6 +259,10 @@ bool TVector<T>:: operator==(const TVector<T> &A)
 				break;
 			}
 		}
+	}
+	else
+	{
+		res = 0;
 	}
 	return res;
 }
@@ -361,8 +381,6 @@ TMatrix<T> TMatrix<T>::operator*(const TMatrix<T> &A)
 		{
 			for (int j = i; j < temp.size; j++)
 			{
-
-				temp.vector[i][j] = 0;
 				for (int k = 0; k < A.vector[j].GetFirstInd()+1; k++)
 				{
 					if ((j >= A.vector[j].GetFirstInd()) && (k >= A.vector[i].GetFirstInd()))

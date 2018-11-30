@@ -22,14 +22,21 @@ int main()
 
 	//return 0;
 	TMatrix<int> D(3);
-	TMatrix<int> F(D), C(D);
+	//cout << D;
+	TMatrix<int> F(D),C;
+	
 	cout << "Vvedite matrizy s razmerom = " << F.GetSize() << "\n";
 	cin >> F;
 	D = F;
 	C = D * F;
 	cout << C;
-	/*if (D != F)
+	//C = D * F;
+	
+
+	//C = D * F;
+	//cout << C;
+	if (D != F)
 		cout << "net";
-	else cout << "ravn";*/
+	else cout << "ravn";
 	return 0;
 }
