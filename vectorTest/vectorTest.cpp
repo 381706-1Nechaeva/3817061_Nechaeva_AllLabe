@@ -50,11 +50,18 @@ TEST(TVector, assign_operator_changes_vector_size)
 	D = F;
 	EXPECT_EQ(5, D.GetSize());
 }
-TEST(TVector, correctness_of_the_comparison_operators)
+TEST(TVector, correctness_of_the_comparison_operators_with_different_size_of_vectors)
 {
 	TVector<int> D(3), F(5);
 	EXPECT_EQ(0, D==F);
 	EXPECT_EQ(1, D != F);
+}
+TEST(TVector, correctness_of_the_comparison_operators)
+{
+  TVector<int> D(3), F(D);
+  EXPECT_TRUE(D == F);
+  D[1] = 5;
+  EXPECT_TRUE(D != F);
 }
 TEST(TVector, can_add_scalar)
 {

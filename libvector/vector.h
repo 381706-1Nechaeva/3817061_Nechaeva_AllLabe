@@ -11,11 +11,11 @@ protected:
 	int size; //размер вектора
 	int FirstInd; // стартовый индекс
 public:
-	TVector(const TVector<T> &A); //конструктор копирования
+  TVector(const TVector<T> &A); //конструктор копирования
 	TVector(int _size = 5, int _FirstInd = 0); //конструктор инициализации
 	~TVector();
 	int GetSize(); // получить размер вектора
-	int GetFirstInd(); // получить стартовый индекс
+  int GetFirstInd(); // получить стартовый индекс
 	TVector<T>& operator=(const TVector<T> &A); //присваивание
 	T& operator[](int i); //индексация
 	bool operator==(const TVector<T> &A); //сравнение
@@ -53,7 +53,7 @@ TVector<T>::TVector(int _size, int _FirstInd)
 	{
 		if (_size == 0)
 		{
-			size = _size;
+			size = 0;
 			vector = NULL;
 		}
 		else
@@ -198,7 +198,7 @@ TVector<T> TVector<T>::operator+(const T &a)
 		for (int i = 0; i < size; i++)
 			S.vector[i] = vector[i] + a;
 	}
-	return S;
+   return S;
 }
 // ---------------------------------------------------------------------------
 template <class T>
@@ -281,7 +281,7 @@ class TMatrix : public TVector <TVector<T> >
 public:
 	TMatrix(int _n = 3);
 	TMatrix(const TMatrix<T>  &A);
-	TMatrix(const TVector<TVector<T> > &A);
+	TMatrix(const TVector<TVector<T> > &A); // конструктор преобразования типа
 	bool operator==(const TMatrix<T> &A); //сравнение
 	bool operator!=(const TMatrix<T> &A); //сравнение
 	TMatrix& operator=(const TMatrix<T> &A); //присваивание
