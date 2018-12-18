@@ -38,8 +38,8 @@ T TQueue<T>::Get()
 {
   if (IsEmpty())
     throw - 1;
-  T res = mas[start];
-  top = ++start%size;
+  T res = this->mas[start];
+  top = ++start%this->size;
   count--;
   return res;
 }
