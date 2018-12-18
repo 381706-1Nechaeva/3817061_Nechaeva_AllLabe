@@ -1,49 +1,51 @@
-#include "stack.h"
+#include "list.h"
 
 #include <gtest.h>
 
-TEST(TStack, can_create_stack_with_positive_size)
+TEST(TList, can_create_list)
 {
-  ASSERT_NO_THROW(TStack<int> A(3););
+  ASSERT_NO_THROW(TList<int> a;);
 }
-TEST(TStack, throws_when_create_stack_with_negative_size)
+TEST(TList, can_copy_list)
 {
-  ASSERT_ANY_THROW(TStack<int> A(-4););
+  TList<int> a;
+  ASSERT_NO_THROW(TList<int> b(a););
 }
-TEST(TStack, can_put_and_get_element_into_stack)
+TEST(TList, can_put_and_get_from_the_begin_list)
 {
-  TStack<int> A(3);
-  A.Put(10);
-  EXPECT_EQ(10, A.Get());
+  TList<int> a;
+  a.PutBegin(3);
+  EXPECT_EQ(3, a.GetBegin());
+  a.PutBegin(2);
+  EXPECT_EQ(2, a.GetBegin());
 }
-TEST(TStack, throws_when_get_element_into_empty_stack)
+TEST(TList, can_put_and_get_from_the_end_list)
 {
-  TStack<int> A(3);
-  ASSERT_ANY_THROW(A.Get());
+  TList<int> a;
+  a.PutBegin(3);
+  a.PutBegin(1);
+  EXPECT_EQ(3, a.GetEnd());
+  a.PutEnd(4);
+  EXPECT_EQ(4, a.GetEnd());
 }
-TEST(TStack, throws_when_put_element_into_full_stack)
+TEST(List, can_use_empty_check_true)
 {
-  TStack<int> A(2);
-  A.Put(10);
-  A.Put(2);
-  ASSERT_ANY_THROW(A.Put(10););
+  TList<int> a;
+  ASSERT_TRUE(a.IsEmpty());
 }
-TEST(TStack, can_use_method_IsEmpty)
+TEST(List, throws_when_try_to_get_begin_into_empty_list)
 {
-  TStack<int> A(2);
-  EXPECT_EQ(1, A.IsEmpty());
-  A.Put(3);
-  EXPECT_NE(1, A.IsEmpty());
+  TList<int> a;
+  ASSERT_ANY_THROW(a.GetBegin());
 }
-TEST(TStack, can_use_method_IsFull)
+TEST(List, throws_when_try_to_get_end_into_empty_list)
 {
-  TStack<int> A(2);
-  EXPECT_EQ(0, A.IsFull());
-  A.Put(3);
-  A.Put(4);
-  EXPECT_NE(0, A.IsFull());
+  TList<int> a;
+  ASSERT_ANY_THROW(a.GetEnd());
 }
-
-
-
-
+TEST(List, correct_empty_check)
+{
+  TList<int> a;
+  a.PutBegin(3);
+  ASSERT_FALSE(a.IsEmpty());
+}
