@@ -11,12 +11,12 @@ protected:
   int top;
   T* mas;
 public:
-  TStack(int _size = 0);
+  TStack(int _size = 5);
   TStack(TStack<T> &A);
   ~TStack();
 
   void Put(const T &A);
-  T Get();
+  virtual  T Get();
 
   bool IsFull();
   bool IsEmpty();
