@@ -8,15 +8,15 @@ before_script:
 script:
   - cmake ../3817061_Nechaeva_AllLabe
   - make -j
-  - cd ./vector
-  - cd ./vectorTest
-  - cd ./stack
-  - cd ./stackTest
-  - cd ./queue
-  - cd ./queueTest
-  - cd ./multistack
-  - cd ./multistackTest
-  - cd ./list
-  - cd ./listTest
+  - ./vector/vector
+  - ./vectorTest/vectorTest
+  - ./stack/stack
+  - ./stackTest/stackTest
+  - ./queue/queue
+  - ./queueTest/queueTest
+  - ./multistack/multistack
+  - ./multistackTest/multistackTest
+  - ./list/list
+  - ./listTest/listTest
 notifications:
   email: false
