@@ -19,12 +19,16 @@ set(liblist liblist)
 set(listTest listTest)
 set(list list)
 
+set(libmultistack libmultistack)
+set(multistackTest multistackTest)
+set(multistack multistack)
+
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE) #Создается переменная CMAKE_CONFIGURATION_TYPES со значением "Debug;Release" и меткой/разделом Configs, переменная сохраниется в специальном файле доступном из всех файлов,
 if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компилятора вариантов сборки
   set(CMAKE_BUILD_TYPE Release) #Если нет то устанавливаем Release
 endif()
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/libvector ${CMAKE_CURRENT_SOURCE_DIR}/libstack ${CMAKE_CURRENT_SOURCE_DIR}/libqueue ${CMAKE_CURRENT_SOURCE_DIR}/liblist
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/libvector ${CMAKE_CURRENT_SOURCE_DIR}/libstack ${CMAKE_CURRENT_SOURCE_DIR}/libqueue ${CMAKE_CURRENT_SOURCE_DIR}/liblist ${CMAKE_CURRENT_SOURCE_DIR}/libmultistack
 ${CMAKE_CURRENT_SOURCE_DIR}/gtest)
 
 
@@ -43,6 +47,10 @@ add_subdirectory(queueTest)
 add_subdirectory(list)
 add_subdirectory(liblist)
 add_subdirectory(listTest)
+
+add_subdirectory(multistack)
+add_subdirectory(libmultistack)
+add_subdirectory(multistackTest)
 
 add_subdirectory(gtest)
 
