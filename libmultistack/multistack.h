@@ -19,7 +19,7 @@ public:
   int GetTop();
 };
 template <class T>
-TNewStack<T>::TNewStack(int _size = 0, T* _mas = 0)
+TNewStack<T>::TNewStack(int _size, T* _mas)
 {
   if (_size < 0)
     throw - 1;
