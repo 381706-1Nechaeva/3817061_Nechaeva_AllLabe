@@ -9,5 +9,14 @@ script:
   - cmake ../3817061_Nechaeva_AllLabe
   - make -j
   - cd ./vector
+  - cd ./vectorTest
+  - cd ./stack
+  - cd ./stackTest
+  - cd ./queue
+  - cd ./queueTest
+  - cd ./multistack
+  - cd ./multistackTest
+  - cd ./list
+  - cd ./listTest
 notifications:
   email: false

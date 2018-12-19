@@ -60,3 +60,4 @@ TEST(TMStack, can_get_elem_into_multictack)
   ASSERT_TRUE(A.IsEmpty(1));
 }
 
+
