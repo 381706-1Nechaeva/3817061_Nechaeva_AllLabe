@@ -17,6 +17,7 @@ public:
 
   void Put(const T &A);
   virtual  T Get();
+  int GetSize(); //получить размер стека
 
   bool IsFull();
   bool IsEmpty();
@@ -90,4 +91,9 @@ template <class T>
 bool TStack<T>::IsFull()
 {
   return top >= size-1;
+}
+template <class T>
+int TStack<T>::GetSize()
+{
+  return size;
 }

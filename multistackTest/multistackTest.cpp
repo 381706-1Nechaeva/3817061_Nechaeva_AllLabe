@@ -1,49 +1,62 @@
-#include "stack.h"
+#include "multistack.h"
 
 #include <gtest.h>
 
-TEST(TStack, can_create_stack_with_positive_size)
+TEST(TMStack, can_create_multistack_with_positive_size)
 {
-  ASSERT_NO_THROW(TStack<int> A(3););
+  ASSERT_NO_THROW(TMStack<int> A(3,4););
 }
-TEST(TStack, throws_when_create_stack_with_negative_size)
+TEST(TMStack, throws_when_create_multistack_with_negative_size)
 {
-  ASSERT_ANY_THROW(TStack<int> A(-4););
+  ASSERT_ANY_THROW(TMStack<int> A(-4,4););
 }
-TEST(TStack, can_put_and_get_element_into_stack)
+TEST(TMStack, throws_when_create_multistack_with_negative_count)
 {
-  TStack<int> A(3);
-  A.Put(10);
-  EXPECT_EQ(10, A.Get());
+  ASSERT_ANY_THROW(TMStack<int> A(3, -4););
 }
-TEST(TStack, throws_when_get_element_into_empty_stack)
+TEST(TMStack, can_copy_multistack)
 {
-  TStack<int> A(3);
-  ASSERT_ANY_THROW(A.Get());
+  TMStack<int> A(6,5);
+  ASSERT_NO_THROW(TMStack<int> B(A));
 }
-TEST(TStack, throws_when_put_element_into_full_stack)
+TEST(TMStack, can_put_and_get_from_multistack)
 {
-  TStack<int> A(2);
-  A.Put(10);
-  A.Put(2);
-  ASSERT_ANY_THROW(A.Put(10););
+  TMStack<int> A(6, 5);
+  A.Put(1, 5);
+  EXPECT_EQ(5, A.Get(1));
 }
-TEST(TStack, can_use_method_IsEmpty)
+TEST(TMStack, throws_when_try_to_get_elem_into_empty_multistack)
 {
-  TStack<int> A(2);
-  EXPECT_EQ(1, A.IsEmpty());
-  A.Put(3);
-  EXPECT_NE(1, A.IsEmpty());
+  TMStack<int> A(6, 5);
+  ASSERT_ANY_THROW(A.Get(1));
 }
-TEST(TStack, can_use_method_IsFull)
+TEST(TMStack, repuck_method_correct_changes_size_full_stack)
 {
-  TStack<int> A(2);
-  EXPECT_EQ(0, A.IsFull());
-  A.Put(3);
-  A.Put(4);
-  EXPECT_NE(0, A.IsFull());
+  TMStack<int> A(6, 3);
+  EXPECT_EQ(2, A.GetSizeSt(0));
+  A.Put(0, 2);
+  A.Put(0, 4);
+  A.Put(0, 7);
+  EXPECT_EQ(3, A.GetSizeSt(0));
 }
-
-
-
+TEST(TMStack, correct_isfull_method)
+{
+  TMStack<int> A(6, 3);
+  A.Put(0, 2);
+  A.Put(0, 4);
+  ASSERT_TRUE(A.IsFull(0));
+}
+TEST(TMStack, correct_isempty_method)
+{
+  TMStack<int> A(6, 3);
+  ASSERT_TRUE(A.IsEmpty(0));
+}
+TEST(TMStack, can_get_elem_into_multictack)
+{
+  TMStack<int> A(4, 2);
+  A.Put(1, 3);
+  ASSERT_FALSE(A.IsEmpty(1));
+  A.Get(1);
+  ASSERT_TRUE(A.IsEmpty(1));
+}
 

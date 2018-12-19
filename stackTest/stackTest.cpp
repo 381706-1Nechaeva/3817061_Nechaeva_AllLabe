@@ -43,6 +43,12 @@ TEST(TStack, can_use_method_IsFull)
   A.Put(4);
   EXPECT_NE(0, A.IsFull());
 }
+TEST(TStack, correct_getsize_method)
+{
+  TStack<int> A(4);
+  EXPECT_EQ(4, A.GetSize());
+}
+
 
 
 

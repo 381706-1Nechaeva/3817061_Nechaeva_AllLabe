@@ -86,6 +86,7 @@ public:
   T Get(int _n); //взять из стека  номер _n элемент
   bool IsFull(int _n); //проверка на полноту
   bool IsEmpty(int _n); //проверка на пустоту
+  int GetSizeSt(int _n); //получить размер стека с номером _n
 };
 //.........................................
 template <class T>
@@ -221,4 +222,10 @@ bool TMStack<T>::IsEmpty(int _n)
     throw - 1;
   }
   return h[_n]->TStack<T>::IsEmpty();
+}
+//.........................................
+template <class T>
+int TMStack<T>::GetSizeSt(int _n)
+{
+  return h[_n]->TStack<T>::GetSize();
 }
