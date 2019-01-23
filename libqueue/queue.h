@@ -12,12 +12,15 @@ protected:
   int count;
   int start;
 public:
-  TQueue(int _size=5);
+  TQueue(int _size = 5);
   void Put(const T &A);
   T Get();
+  void Print();
+
   bool IsEmpty() { return count == 0; }
+  bool IsFull() { return count == size; }
 };
- 
+
 //....................................
 template <class T>
 TQueue<T>::TQueue(int _size) :TStack<T>(_size)
@@ -29,7 +32,11 @@ TQueue<T>::TQueue(int _size) :TStack<T>(_size)
 template <class T>
 void TQueue<T>::Put(const T &A)
 {
+  if (IsFull())
+    throw - 1;
   TStack<T>::Put(A);
+  if (top >= size - 1)
+    top = -1;
   count++;
 }
 //....................................
@@ -39,10 +46,32 @@ T TQueue<T>::Get()
   if (IsEmpty())
     throw - 1;
   T res = this->mas[start];
-  this->top = ++start%this->size;
+  start++;
+ // this->top = ++start%this->size;
+  if (start >= size)
+    start = 0;
+  //if (top >= size - 1)
+  //  top = -1;
   count--;
   return res;
 }
-
-  
-
+template<class T>
+void TQueue<T>::Print()
+{
+  if (count == 0)
+    cout << "Очередь пустая\n";
+  else
+  {
+    if (top < start)
+    {
+      for (int i = start; i < size; i++)
+        cout << mas[i] << "\t";
+      for (int i = 0; i < top + 1; i++)
+        cout << mas[i] << "\t";
+    }
+    else
+      for (int i = start; i < top + 1; i++)
+        cout << mas[i] << "\t";
+    cout << "\n";
+  }
+}

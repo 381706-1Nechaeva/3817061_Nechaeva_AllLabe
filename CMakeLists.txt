@@ -6,6 +6,7 @@ project(${PROJECT_NAME}) # Название проекта
 set(vector vector) #Переменная с именем библиотеки
 set(libvector libvector)
 set(vectorTest vectorTest)
+set(libthrows libthrows)
 
 set(libstack libstack)
 set(stackTest stackTest)
@@ -18,6 +19,10 @@ set(queue queue)
 set(liblist liblist)
 set(listTest listTest)
 set(list list)
+
+set(libpostfix libpostfix)
+set(postfixTest postfixTest)
+set(postfix postfix)
 
 set(libmultistack libmultistack)
 set(multistackTest multistackTest)
@@ -32,13 +37,17 @@ if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компиля
   set(CMAKE_BUILD_TYPE Release) #Если нет то устанавливаем Release
 endif()
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/libvector ${CMAKE_CURRENT_SOURCE_DIR}/libstack ${CMAKE_CURRENT_SOURCE_DIR}/libarrlist ${CMAKE_CURRENT_SOURCE_DIR}/libqueue ${CMAKE_CURRENT_SOURCE_DIR}/liblist ${CMAKE_CURRENT_SOURCE_DIR}/libmultistack
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/libvector ${CMAKE_CURRENT_SOURCE_DIR}/libstack ${CMAKE_CURRENT_SOURCE_DIR}/libarrlist ${CMAKE_CURRENT_SOURCE_DIR}/libqueue ${CMAKE_CURRENT_SOURCE_DIR}/liblist ${CMAKE_CURRENT_SOURCE_DIR}/libmultistack ${CMAKE_CURRENT_SOURCE_DIR}/libpostfix ${CMAKE_CURRENT_SOURCE_DIR}/libthrows
 ${CMAKE_CURRENT_SOURCE_DIR}/gtest)
 
 
 add_subdirectory(vector)
 add_subdirectory(libvector)
 add_subdirectory(vectorTest)
+
+add_subdirectory(postfix)
+add_subdirectory(libpostfix)
+add_subdirectory(postfixTest)
 
 add_subdirectory(stack)
 add_subdirectory(libstack)
@@ -47,6 +56,8 @@ add_subdirectory(stackTest)
 add_subdirectory(queue)
 add_subdirectory(libqueue)
 add_subdirectory(queueTest)
+
+add_subdirectory(libthrows)
 
 add_subdirectory(list)
 add_subdirectory(liblist)

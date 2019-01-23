@@ -18,5 +18,7 @@ script:
   - ./multistackTest/multistackTest
   - ./list/list
   - ./listTest/listTest
+    - ./postfix/postfix
+  - ./postfixTest/postfixTest
 notifications:
   email: false
