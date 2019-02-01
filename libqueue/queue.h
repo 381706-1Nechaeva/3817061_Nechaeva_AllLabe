@@ -70,7 +70,7 @@ void TQueue<T>::Print()
         cout << TStack<T>::mas[i] << "\t";
     }
     else
-      for (int i = start; i < top + 1; i++)
+      for (int i = start; i < TStack<T>::top + 1; i++)
         cout << TStack<T>::mas[i] << "\t";
     cout << "\n";
   }
