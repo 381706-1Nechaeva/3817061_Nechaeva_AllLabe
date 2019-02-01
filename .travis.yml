@@ -9,16 +9,10 @@ script:
   - cmake ../3817061_Nechaeva_AllLabe
   - make -j
   - ./vector/vector
-  - ./vectorTest/vectorTest
   - ./stack/stack
-  - ./stackTest/stackTest
   - ./queue/queue
-  - ./queueTest/queueTest
   - ./multistack/multistack
-  - ./multistackTest/multistackTest
   - ./list/list
-  - ./listTest/listTest
-    - ./postfix/postfix
-  - ./postfixTest/postfixTest
+  - ./postfix/postfix
 notifications:
   email: false
