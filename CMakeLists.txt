@@ -6,6 +6,7 @@ project(${PROJECT_NAME}) # Название проекта
 set(vector vector) #Переменная с именем библиотеки
 set(libvector libvector)
 set(vectorTest vectorTest)
+
 set(libthrows libthrows)
 
 set(libstack libstack)

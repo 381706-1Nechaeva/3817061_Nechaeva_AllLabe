@@ -3,6 +3,7 @@
 #include <string>
 #include "stack.h"
 #include "queue.h"
+#include "throws.h"
 
 using namespace std;
 

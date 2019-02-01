@@ -17,7 +17,7 @@ char* TPostfix::Postfix()
   for (int i = 0;inputistr[i]!='\0'; i++)
   {
     f = inputistr[i];
-    if (isalnum(f) || f == '.' && !isoperation(f))
+    if ((isalnum(f) || f == '.') && !isoperation(f))
     {
       outputistr[ind++] = f;
     }
