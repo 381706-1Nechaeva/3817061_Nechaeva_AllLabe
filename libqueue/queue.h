@@ -18,7 +18,7 @@ public:
   void Print();
 
   bool IsEmpty() { return count == 0; }
-  bool IsFull() { return count == size; }
+  bool IsFull() { return count == TStack<T>::size; }
 };
 
 //....................................
@@ -35,8 +35,8 @@ void TQueue<T>::Put(const T &A)
   if (IsFull())
     throw - 1;
   TStack<T>::Put(A);
-  if (top >= size - 1)
-    top = -1;
+  if (TStack<T>::top >= TStack<T>::size - 1)
+    TStack<T>::top = -1;
   count++;
 }
 //....................................
@@ -48,7 +48,7 @@ T TQueue<T>::Get()
   T res = this->mas[start];
   start++;
  // this->top = ++start%this->size;
-  if (start >= size)
+  if (start >= TStack<T>::size)
     start = 0;
   //if (top >= size - 1)
   //  top = -1;
@@ -62,16 +62,16 @@ void TQueue<T>::Print()
     cout << "Очередь пустая\n";
   else
   {
-    if (top < start)
+    if (TStack<T>::top < start)
     {
-      for (int i = start; i < size; i++)
-        cout << mas[i] << "\t";
-      for (int i = 0; i < top + 1; i++)
-        cout << mas[i] << "\t";
+      for (int i = start; i < TStack<T>::size; i++)
+        cout << TStack<T>::mas[i] << "\t";
+      for (int i = 0; i < TStack<T>::top + 1; i++)
+        cout << TStack<T>::mas[i] << "\t";
     }
     else
       for (int i = start; i < top + 1; i++)
-        cout << mas[i] << "\t";
+        cout << TStack<T>::mas[i] << "\t";
     cout << "\n";
   }
 }
