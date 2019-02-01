@@ -9,11 +9,11 @@ class TException
 private:
   string str;
 public:
-  TException(std::string _str); //йнмярпсйрнп
+  TException(string _str); //йнмярпсйрнп
   void Print(); //бшбнд дюммнцн хяйкчвемхъ мю йнмянкэ
 };
 
-TException::TException(std::string _str) 
+TException::TException(string _str) 
 {
   str = _str;
 }

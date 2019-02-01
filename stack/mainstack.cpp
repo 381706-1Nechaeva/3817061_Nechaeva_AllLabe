@@ -1,6 +1,6 @@
 ﻿#include <iostream>
-
-#include "vector.h"
+#include <locale.h>
+#include "stack.h"
 
 int main()
 {
