@@ -111,7 +111,7 @@ int TVector<T>::GetFirstInd()
 template <class T>
 TVector<T> TVector<T>::operator+(const TVector<T> &A)
 {
-	TVector<T> S;
+	TVector<T> S(*this);
 	if (size == A.size)
 	{
 		if (size == 0)
@@ -122,6 +122,7 @@ TVector<T> TVector<T>::operator+(const TVector<T> &A)
 			S.vector = new T[size];
 			for (int i = 0; i < size; i++)
 				S.vector[i] = vector[i] + A.vector[i];
+      
 		}
 	}
 	else
@@ -132,7 +133,7 @@ TVector<T> TVector<T>::operator+(const TVector<T> &A)
 template <class T>
 TVector<T> TVector<T>::operator-(const TVector<T> &A)
 {
-	TVector<T> S;
+	TVector<T> S(*this);
 	if (size == A.size)
 	{
 		if (size == 0)
@@ -288,6 +289,7 @@ public:
 	TMatrix operator+(const TMatrix<T> &A); //сложение матриц
 	TMatrix operator-(const TMatrix<T> &A); // вычитание
 	TMatrix operator*(const TMatrix<T> &A); // умножение матриц
+  TMatrix operator/(const TMatrix<T> &A); // деление матриц
 
 	//ввод/вывод в поток
 
@@ -390,9 +392,66 @@ TMatrix<T> TMatrix<T>::operator*(const TMatrix<T> &A)
 				}
 			}
 		}
-				
+	return temp;			
 	}
 	else
 		throw 1;
-	return temp;
+	
+}
+//............................................................
+template <class T>
+TMatrix<T> TMatrix<T>::operator/(const TMatrix<T> &A)
+{
+  if (this->size == A.size)
+  {
+    TMatrix <T> copy(*this);
+    TMatrix <T> rez(A);
+    TMatrix <T> edin(this->size), temp(this->size);
+    T a, r;
+    for (int i = 0; i < this->size; i++)
+    {
+      for (int j = i; j < this->size; j++)
+      {
+        if (i == j)
+          edin[i][j] = 1;
+        else
+          edin[i][j] = 0;
+      }
+    }
+    for (int i = 0; i < this->size; i++)
+    {
+      for (int j = 0; j < this->size; j++)
+      {
+        if (i != j)
+        {
+          if (j >= rez.vector[i].GetFirstInd() && j >= rez.vector[j].GetFirstInd())
+          {
+            r = rez[i][j] / rez[j][j];
+            for (int k = 0; k < this->size; k++)
+            {
+              if (k >= rez.vector[k].GetFirstInd() && k >= rez.vector[j].GetFirstInd())
+              {
+                edin[i][k] -= r * edin[j][k];
+                rez[i][k] -= r * rez[j][k];
+              }
+            }
+          }
+        }
+      }
+    }
+    for (int i = 0; i < this->size; i++)
+    {
+      if (i >= rez.vector[i].GetFirstInd())
+        a = rez[i][i];
+      for (int j = 0; j < this->size; j++)
+      {
+        if (j >= rez.vector[j].GetFirstInd() && j >= rez.vector[i].GetFirstInd())
+          edin[i][j] /= a;
+      }
+    }
+    temp = copy * edin;
+    return temp;
+  }
+  else
+    throw - 1;
 }
