@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include <math.h>
+#include "throws.h"
+
 using namespace std;
 template <class T>
 
@@ -48,7 +50,7 @@ template <class T>
 TVector<T>::TVector(int _size, int _FirstInd)
 {
 	if (_size < 0)
-		throw - 1;
+		throw TException("Error size");
 	else
 	{
 		if (_size == 0)
@@ -59,14 +61,17 @@ TVector<T>::TVector(int _size, int _FirstInd)
 		else
 		{
 			if ((_FirstInd < 0) || (_FirstInd >= _size))
-				throw - 1;
+				throw TException("Error firs index");
 			else
 			{
 				size = _size - _FirstInd;
 				FirstInd = _FirstInd;
 				vector = new T[size];
-				for (int i = 0; i < size; i++)
-					vector[i] = 0;
+        for (int i = 0; i < size; i++)
+        {
+          vector[i] = 0;
+ 
+        }
 			}
 		}
 	}
@@ -126,7 +131,7 @@ TVector<T> TVector<T>::operator+(const TVector<T> &A)
 		}
 	}
 	else
-		throw 1;
+		throw TException("Different size");
 	return S;
 }
 // ---------------------------------------------------------------------------
@@ -147,7 +152,7 @@ TVector<T> TVector<T>::operator-(const TVector<T> &A)
 		}
 	}
 	else
-		throw - 1;
+		throw TException("Different size");
 	return S;
 }
 // ---------------------------------------------------------------------------
@@ -164,10 +169,11 @@ T TVector<T>::operator*(const TVector<T> &A)
 			for (int i = 0; i < size; i++)
 				summ += vector[i] * A.vector[i];
 		}
-	}
-	else
-		throw 1;
 	return summ;
+  }
+	else
+		throw TException("Different size");
+	
 }
 // ---------------------------------------------------------------------------
 template <class T>
@@ -221,27 +227,29 @@ TVector<T> TVector<T>::operator-(const T &a)
 template <class T>
 TVector<T>& TVector<T>::operator=(const TVector<T> &A)
 {
-	if (this != &A)
-	{
-		size = A.size;
-		FirstInd = A.FirstInd;
-		if (size != 0)
-		{
-			if (vector != 0)
-				delete[]vector;
-			vector = new T[size];
-			for (int i = 0; i < size; i++)
-				vector[i] = A.vector[i];
-		}
-	}
-	return *this;
+  if (this != &A)
+  {
+    size = A.size;
+    FirstInd = A.FirstInd;
+    if (size != 0)
+    {
+      if (vector != 0)
+        delete[]vector;
+      vector = new T[size];
+      for (int i = 0; i < size; i++)
+        vector[i] = A.vector[i];
+    }
+    return *this;
+  }
+  else
+    throw TException("The same vector");
 }
 // ---------------------------------------------------------------------------
 template <class T>
 T& TVector<T>::operator[](int i)
 {
 	if ((i < 0) || (i >= size + FirstInd))
-		throw - 1;
+		throw TException("Error index");
 	else
 		return vector[i - FirstInd];
 }
@@ -315,7 +323,7 @@ template <class T>
 TMatrix<T>::TMatrix(int _n) : TVector<TVector<T> >(_n)
 {
 	if (_n < 1)
-		throw 1;
+		throw TException("Error size");
 	for (int i = 0; i < _n; i++)
 		this->vector[i] = TVector<T>(_n, i);
 }
@@ -323,11 +331,14 @@ TMatrix<T>::TMatrix(int _n) : TVector<TVector<T> >(_n)
 template <class T>
 TMatrix<T>::TMatrix(const TMatrix<T> &A) : TVector<TVector<T> >(A)
 {
+
 }
 //............................................................
 template <class T>
 TMatrix<T>::TMatrix(const TVector<TVector<T> > & A) : TVector<TVector<T> >(A)
 {
+  for (int i = 0; i < A.GetSize(); i++)
+    this->vector[i] = TVector<T>(A.GetSize(), i);
 }
 //............................................................
 template <class T>
@@ -395,7 +406,7 @@ TMatrix<T> TMatrix<T>::operator*(const TMatrix<T> &A)
 	return temp;			
 	}
 	else
-		throw 1;
+		throw TException("Different size");
 	
 }
 //............................................................
@@ -453,5 +464,5 @@ TMatrix<T> TMatrix<T>::operator/(const TMatrix<T> &A)
     return temp;
   }
   else
-    throw - 1;
+    throw TException("Different size");
 }

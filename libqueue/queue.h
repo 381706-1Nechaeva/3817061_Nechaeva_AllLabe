@@ -1,6 +1,6 @@
 #pragma once
-#include <iostream>
-#include <math.h>
+//#include <iostream>
+//#include <math.h>
 #include "stack.h"
 
 using namespace std;
@@ -33,7 +33,7 @@ template <class T>
 void TQueue<T>::Put(const T &A)
 {
   if (IsFull())
-    throw - 1;
+    throw TException("Queue is full");
   TStack<T>::Put(A);
   if (TStack<T>::top >= TStack<T>::size - 1)
     TStack<T>::top = -1;
@@ -44,7 +44,7 @@ template <class T>
 T TQueue<T>::Get()
 {
   if (IsEmpty())
-    throw - 1;
+    throw TException("Queue is empty");
   T res = this->mas[start];
   start++;
  // this->top = ++start%this->size;

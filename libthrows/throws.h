@@ -7,18 +7,19 @@ using namespace std;
 class TException
 {
 private:
-  string str;
+  char* str;
 public:
-  TException(const string _str); //йнмярпсйрнп
-  void Print(); //бшбнд дюммнцн хяйкчвемхъ мю йнмянкэ
+  TException(char* _str) ;  //йнмярпсйрнп
+  void Print() ;  //бшбнд дюммнцн хяйкчвемхъ мю йнмянкэ
 };
 
-TException::TException(const string _str) 
+TException::TException(char* _str) 
 {
-  str = _str;
+  str = new char[255];
+  strcpy(str, _str);
 }
 
-void TException::Print()
+void TException::Print() 
 {
   cout << "\nWarning! \nMessage: " << str << endl;
 }
