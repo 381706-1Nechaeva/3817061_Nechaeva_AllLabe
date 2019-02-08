@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <iostream>
 #include <string>
 
@@ -7,16 +7,15 @@ using namespace std;
 class TException
 {
 private:
-  char* str;
+  string str;
 public:
-  TException(char* _str) ;  //ÊÎÍÑÒĞÓÊÒÎĞ
-  void Print() ;  //ÂÛÂÎÄ ÄÀÍÍÎÃÎ ÈÑÊËŞ×ÅÍÈß ÍÀ ÊÎÍÑÎËÜ
+  TException(const string _str) ;  //ĞšĞĞĞ¡Ğ¢Ğ Ğ£ĞšĞ¢ĞĞ 
+  void Print() ;  //Ğ’Ğ«Ğ’ĞĞ” Ğ”ĞĞĞĞĞ“Ğ Ğ˜Ğ¡ĞšĞ›Ğ®Ğ§Ğ•ĞĞ˜Ğ¯ ĞĞ ĞšĞĞĞ¡ĞĞ›Ğ¬
 };
 
-TException::TException(char* _str) 
+TException::TException(const string _str)
 {
-  str = new char[255];
-  strcpy(str, _str);
+  str = _str;
 }
 
 void TException::Print() 

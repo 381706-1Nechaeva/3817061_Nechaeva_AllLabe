@@ -1,6 +1,4 @@
 #pragma once
-//#include <iostream>
-//#include <math.h>
 #include "stack.h"
 
 using namespace std;

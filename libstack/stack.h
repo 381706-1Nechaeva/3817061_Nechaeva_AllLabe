@@ -1,6 +1,5 @@
 #pragma once
-#include <iostream>
-#include <string>#include <math.h>
+#include <math.h>
 #include "throws.h"
 
 using namespace std;
