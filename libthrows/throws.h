@@ -9,16 +9,16 @@ class TException
 private:
   string str;
 public:
-  TException(const string _str) ;  //КОНСТРУКТОР
-  void Print() ;  //ВЫВОД ДАННОГО ИСКЛЮЧЕНИЯ НА КОНСОЛЬ
+  inline TException(const string _str) ;  //КОНСТРУКТОР
+  inline void Print() ;  //ВЫВОД ДАННОГО ИСКЛЮЧЕНИЯ НА КОНСОЛЬ
 };
 
-TException::TException(const string _str)
+inline TException::TException(const string _str)
 {
   str = _str;
 }
 
-void TException::Print() 
+inline void TException::Print()
 {
   cout << "\nWarning! \nMessage: " << str << endl;
 }

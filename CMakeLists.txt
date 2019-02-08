@@ -1,6 +1,6 @@
 ﻿cmake_minimum_required(VERSION 2.8) #Проверка версии CMake.
 
-set(PROJECT_NAME AllLabe) #Создаем обычную локальную переменную с именем проекта
+set(PROJECT_NAME Labe) #Создаем обычную локальную переменную с именем проекта
 project(${PROJECT_NAME}) # Название проекта
 
 set(vector vector) #Переменная с именем библиотеки
