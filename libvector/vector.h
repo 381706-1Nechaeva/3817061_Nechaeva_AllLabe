@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include <math.h>
 #include "throws.h"
 
@@ -337,8 +336,8 @@ TMatrix<T>::TMatrix(const TMatrix<T> &A) : TVector<TVector<T> >(A)
 template <class T>
 TMatrix<T>::TMatrix(const TVector<TVector<T> > & A) : TVector<TVector<T> >(A)
 {
-  for (int i = 0; i < A.GetSize(); i++)
-    this->vector[i] = TVector<T>(A.GetSize(), i);
+  //for (int i = 0; i < A.GetSize(); i++)
+  //  this->vector[i] = TVector<T>(A.GetSize(), i);
 }
 //............................................................
 template <class T>
