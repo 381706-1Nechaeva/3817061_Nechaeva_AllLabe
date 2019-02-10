@@ -17,9 +17,9 @@ set(libqueue libqueue)
 set(queueTest queueTest)
 set(queue queue)
 
-#set(liblist liblist)
-#set(listTest listTest)
-#set(list list)
+set(liblist liblist)
+set(listTest listTest)
+set(list list)
 
 #set(libpostfix libpostfix)
 #set(postfixTest postfixTest)
@@ -38,8 +38,8 @@ if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компиля
   set(CMAKE_BUILD_TYPE Release) #Если нет то устанавливаем Release
 endif()
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/libvector ${CMAKE_CURRENT_SOURCE_DIR}/libstack ${CMAKE_CURRENT_SOURCE_DIR}/libqueue ${CMAKE_CURRENT_SOURCE_DIR}/libthrows
-#${CMAKE_CURRENT_SOURCE_DIR}/libarrlist ${CMAKE_CURRENT_SOURCE_DIR}/liblist ${CMAKE_CURRENT_SOURCE_DIR}/libmultistack ${CMAKE_CURRENT_SOURCE_DIR}/libpostfix 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/libvector ${CMAKE_CURRENT_SOURCE_DIR}/libstack ${CMAKE_CURRENT_SOURCE_DIR}/libqueue ${CMAKE_CURRENT_SOURCE_DIR}/libthrows ${CMAKE_CURRENT_SOURCE_DIR}/liblist
+#${CMAKE_CURRENT_SOURCE_DIR}/libarrlist ${CMAKE_CURRENT_SOURCE_DIR}/libmultistack ${CMAKE_CURRENT_SOURCE_DIR}/libpostfix 
 ${CMAKE_CURRENT_SOURCE_DIR}/gtest)
 
 
@@ -61,9 +61,9 @@ add_subdirectory(queueTest)
 
 add_subdirectory(libthrows)
 
-#add_subdirectory(list)
-#add_subdirectory(liblist)
-#add_subdirectory(listTest)
+add_subdirectory(list)
+add_subdirectory(liblist)
+add_subdirectory(listTest)
 
 #add_subdirectory(multistack)
 #add_subdirectory(libmultistack)
