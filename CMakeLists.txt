@@ -25,9 +25,9 @@ set(list list)
 #set(postfixTest postfixTest)
 #set(postfix postfix)
 
-#set(libmultistack libmultistack)
-#set(multistackTest multistackTest)
-#set(multistack multistack)
+set(libmultistack libmultistack)
+set(multistackTest multistackTest)
+set(multistack multistack)
 
 #set(libarrlist libarrlist)
 #set(arrlistTest arrlistTest)
@@ -39,8 +39,8 @@ if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компиля
 endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/libvector ${CMAKE_CURRENT_SOURCE_DIR}/libstack ${CMAKE_CURRENT_SOURCE_DIR}/libqueue ${CMAKE_CURRENT_SOURCE_DIR}/libthrows ${CMAKE_CURRENT_SOURCE_DIR}/liblist
-#${CMAKE_CURRENT_SOURCE_DIR}/libarrlist ${CMAKE_CURRENT_SOURCE_DIR}/libmultistack ${CMAKE_CURRENT_SOURCE_DIR}/libpostfix 
-${CMAKE_CURRENT_SOURCE_DIR}/gtest)
+#${CMAKE_CURRENT_SOURCE_DIR}/libarrlist ${CMAKE_CURRENT_SOURCE_DIR}/libpostfix 
+${CMAKE_CURRENT_SOURCE_DIR}/libmultistack ${CMAKE_CURRENT_SOURCE_DIR}/gtest)
 
 
 add_subdirectory(vector)
@@ -65,9 +65,9 @@ add_subdirectory(list)
 add_subdirectory(liblist)
 add_subdirectory(listTest)
 
-#add_subdirectory(multistack)
-#add_subdirectory(libmultistack)
-#add_subdirectory(multistackTest)
+add_subdirectory(multistack)
+add_subdirectory(libmultistack)
+add_subdirectory(multistackTest)
 
 #add_subdirectory(arrlist)
 #add_subdirectory(libarrlist)

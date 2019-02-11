@@ -100,6 +100,6 @@ int TStack<T>::GetSize()
 template <class T>
 void TStack<T>::Print()
 {
-  for (int i = top ; i >= 0; i-- )
-    cout <<"{" <<mas[i] << "}\n";
+  for (int i = top ; i >=0; i-- )
+    cout <<"  {" <<mas[i] << "}\n";
 }
