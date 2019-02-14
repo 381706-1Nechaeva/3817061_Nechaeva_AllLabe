@@ -84,7 +84,8 @@ public:
   bool IsFull(int _n); //проверка на полноту
   bool IsEmpty(int _n); //проверка на пустоту
   int GetSizeSt(int _n); //получить размер стека с номером _n
-  void PrintTM();
+  void PrintTM(); //печать мультистека
+  int Count(); //количество стеков
 };
 //.........................................
 template <class T>
@@ -229,4 +230,10 @@ void TMStack<T>::PrintTM()
     cout << "  " << i + 1 << " стек мультистека\n";
     h[i]->TStack<T>::Print();
   }
+}
+//.........................................
+template <class T>
+int TMStack<T>::Count()
+{
+  return n;
 }

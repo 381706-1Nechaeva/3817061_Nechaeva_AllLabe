@@ -59,5 +59,10 @@ TEST(TMStack, can_get_elem_into_multictack)
   A.Get(1);
   ASSERT_TRUE(A.IsEmpty(1));
 }
+TEST(TMStack, correct_count_method)
+{
+  TMStack<int> A(4, 2);
+  EXPECT_EQ(2, A.Count());
+}
 
 
