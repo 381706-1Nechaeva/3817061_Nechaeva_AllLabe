@@ -148,7 +148,7 @@ double TPostfix::calculate()
       temp = new char[255];
       while (outputistr[i] != ' ' && outputistr[i] != '\0')
         temp[s++] = outputistr[i++];
-      A.Put(stoi(temp));
+      A.Put(atoi(temp));
       s = 0;
       delete temp;
     }
@@ -157,7 +157,7 @@ double TPostfix::calculate()
       temp = new char[255];
       while (outputistr[i] != ' ' && outputistr[i] != '\0')
         temp[s++] = outputistr[i++];
-      A.Put(stoi(temp));
+      A.Put(atoi(temp));
       s = 0;
       delete temp;
     }
