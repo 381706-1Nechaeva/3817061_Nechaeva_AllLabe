@@ -2,6 +2,8 @@
 
 #include "stack.h"
 #include "throws.h"
+#include <stdlib.h>
+#include <cstdlib>
 
 using namespace std;
 class TPostfix
