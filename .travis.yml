@@ -11,6 +11,8 @@ script:
   - ./vector/vector
   - ./stack/stack
   - ./queue/queue
-  - ./multistack/multistack
+  - ./postfix/postfix
+  - ./arrlist/arrlist
+  - ./stacklist/stacklist  
 notifications:
   email: false

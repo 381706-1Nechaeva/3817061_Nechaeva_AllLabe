@@ -11,6 +11,7 @@ protected:
   int start;
 public:
   TQueue(int _size = 5);
+  TQueue(TQueue<T> &A);
   void Put(const T &A);
   T Get();
   void Print();
@@ -25,6 +26,13 @@ TQueue<T>::TQueue(int _size) :TStack<T>(_size)
 {
   count = 0;
   start = 0;
+}
+//....................................
+template <class T>
+TQueue<T>::TQueue(TQueue<T> &A) :TStack<T>(A)
+{
+  count = A.count;
+  start = A.start;
 }
 //....................................
 template <class T>
@@ -45,11 +53,8 @@ T TQueue<T>::Get()
     throw TException("Queue is empty");
   T res = this->mas[start];
   start++;
- // this->top = ++start%this->size;
   if (start >= TStack<T>::size)
     start = 0;
-  //if (top >= size - 1)
-  //  top = -1;
   count--;
   return res;
 }

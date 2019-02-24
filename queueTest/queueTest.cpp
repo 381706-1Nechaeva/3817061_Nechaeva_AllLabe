@@ -6,6 +6,11 @@ TEST(TQueue, can_create_queue_with_positive_size)
 {
   ASSERT_NO_THROW(TQueue<int> A(3););
 }
+TEST(TQueue, can_copy_queue)
+{
+  TQueue<int> A(3);
+  ASSERT_NO_THROW(TQueue<int> B(A););
+}
 TEST(TQueue, throws_when_create_queue_with_negative_size)
 {
   ASSERT_ANY_THROW(TQueue<int> A(-5););

@@ -35,12 +35,7 @@ TList<T>::TList(TList<T> &A)
 {
   begin = 0;
   for (TElem<T>* i = A.begin; i != 0; i = i->GetNext())
-  {
-    if (i == A.begin)
-      this->PutBegin(i->Get());
-    else
       this->PutEnd(i->Get());
-  }
 }
 //................................................
 template <class T>
@@ -72,10 +67,10 @@ void TList<T>::PutTek(const T &a, int tek)
 {
   TElem<T>* i;
   int  j = 0;
-  if (tek <= 1 || tek > this->Count())
+  if (tek < 1 || tek >= this->Count())
     throw TException("Error location");
     i = begin;
-    for (j = 1; j < tek - 1; i = i->GetNext())
+    for (j = 1; j < tek; i = i->GetNext())
       j++;
     TElem<T>* temp = new TElem<T>(a, i->GetNext());
     i->SetNext(temp);
@@ -130,10 +125,10 @@ T TList<T>::GetTek(int tek)
     throw TException("List is empty");
   TElem<T>* i;
   int j = 0;
-  if (tek <= 1 || tek > this->Count())
+  if (tek < 1 || tek >= this->Count())
     throw TException("Error location");
   i = begin;
-  for (j = 1; j < tek - 1; i = i->GetNext())
+  for (j = 1; j < tek; i = i->GetNext())
     j++;
   T res = i->GetNext()->Get();
   TElem<T>* temp = i->GetNext();

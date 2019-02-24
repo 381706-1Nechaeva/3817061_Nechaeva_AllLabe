@@ -28,22 +28,22 @@ TEST(TList, can_put_and_get_from_the_end_list)
   a.PutEnd(4);
   EXPECT_EQ(4, a.GetEnd());
 }
-TEST(List, can_use_empty_check_true)
+TEST(TList, can_use_empty_check_true)
 {
   TList<int> a;
   ASSERT_TRUE(a.IsEmpty());
 }
-TEST(List, throws_when_try_to_get_begin_into_empty_list)
+TEST(TList, throws_when_try_to_get_begin_into_empty_list)
 {
   TList<int> a;
   ASSERT_ANY_THROW(a.GetBegin());
 }
-TEST(List, throws_when_try_to_get_end_into_empty_list)
+TEST(TList, throws_when_try_to_get_end_into_empty_list)
 {
   TList<int> a;
   ASSERT_ANY_THROW(a.GetEnd());
 }
-TEST(List, correct_empty_check)
+TEST(TList, correct_empty_check)
 {
   TList<int> a;
   a.PutBegin(3);
@@ -54,8 +54,8 @@ TEST(TList, can_put_and_get_from_any_place)
   TList<int> a;
   a.PutBegin(3);
   a.PutEnd(5);
-  a.PutTek(4, 2);
-  EXPECT_EQ(4, a.GetTek(2));
+  a.PutTek(4, 1);
+  EXPECT_EQ(4, a.GetTek(1));
 }
 TEST(TList, throw_when_put_and_get_from_any_place_into_empty_list)
 {
@@ -88,7 +88,7 @@ TEST(TList, correct_count_method)
   TList<int> a;
   a.PutBegin(3);
   a.PutEnd(10);
-  a.PutTek(1,2);
+  a.PutTek(1,1);
   a.GetBegin();
   EXPECT_EQ(2, a.Count());
 }

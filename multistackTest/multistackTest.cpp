@@ -37,7 +37,7 @@ TEST(TMStack, repuck_method_correct_changes_size_full_stack)
   A.Put(0, 2);
   A.Put(0, 4);
   A.Put(0, 7);
-  EXPECT_EQ(3, A.GetSizeSt(0));
+  EXPECT_EQ(4, A.GetSizeSt(0));
 }
 TEST(TMStack, correct_isfull_method)
 {
