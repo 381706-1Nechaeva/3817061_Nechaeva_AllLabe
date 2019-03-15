@@ -10,7 +10,7 @@ protected:
   int count;
   int start;
 public:
-  TQueue(int _size = 5);
+  TQueue(int _size = 10);
   TQueue(TQueue<T> &A);
   void Put(const T &A);
   T Get();

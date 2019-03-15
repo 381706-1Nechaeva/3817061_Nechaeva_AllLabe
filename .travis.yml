@@ -13,6 +13,7 @@ script:
   - ./queue/queue
   - ./postfix/postfix
   - ./arrlist/arrlist
-  - ./stacklist/stacklist  
+  - ./stacklist/stacklist
+  - ./polinom/polinom
 notifications:
   email: false
