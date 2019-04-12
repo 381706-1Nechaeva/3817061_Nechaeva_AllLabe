@@ -17,8 +17,9 @@ int main()
   W.Add(R,E);
   W.Add(B, R);
   TPlex *Q = new TPlex(W);
+  cout << "Рекурсивный\n";
   W.Show(Q);
-  cout << "Оп оп\n";
+  cout << "Итеративный\n";
   W.Show();
   return 0;
 }
