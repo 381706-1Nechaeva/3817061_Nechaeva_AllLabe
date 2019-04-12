@@ -8,6 +8,12 @@ before_script:
 script:
   - cmake ../3817061_Nechaeva_AllLabe
   - make -j
-  - cd ./vector
+  - ./vector/vector
+  - ./stack/stack
+  - ./queue/queue
+  - ./postfix/postfix
+  - ./arrlist/arrlist
+  - ./stacklist/stacklist
+  - ./polinom/polinom
 notifications:
   email: false
