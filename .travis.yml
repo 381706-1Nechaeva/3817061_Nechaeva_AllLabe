@@ -15,5 +15,6 @@ script:
   - ./arrlist/arrlist
   - ./stacklist/stacklist
   - ./polinom/polinom
+  - ./plex/plex 
 notifications:
   email: false
