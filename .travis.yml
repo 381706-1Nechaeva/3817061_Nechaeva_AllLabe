@@ -16,5 +16,6 @@ script:
   - ./stacklist/stacklist
   - ./polinom/polinom
   - ./plex/plex 
+  - ./table/table 
 notifications:
   email: false
