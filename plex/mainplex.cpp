@@ -20,7 +20,6 @@ int main()
   W.Add(E,S);
   W.Add(S, R);
   W.Add(S, U);
-  W.Add(B, U);
   TPlex *Q = new TPlex(W);
   cout << "Рекурсивный\n";
   W.Show(Q);
