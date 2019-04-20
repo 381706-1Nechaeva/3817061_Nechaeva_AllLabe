@@ -20,7 +20,8 @@ public:
   virtual  T Get();
   int GetSize(); //получить размер стека
   void Print(); //вывод стека
-
+  int GetTop();
+  void Repack();
   bool IsFull();
   bool IsEmpty();
 };
@@ -68,7 +69,7 @@ template <class T>
 void TStack<T>::Put(const T &A)
 {
   if (IsFull())
-    throw TException("Stack is full");
+    Repack();
   top++;
   mas[top] = A;
 }
@@ -90,7 +91,7 @@ bool TStack<T>::IsEmpty()
 template <class T>
 bool TStack<T>::IsFull()
 {
-  return top >= size-1;
+  return top >= size - 1;
 }
 template <class T>
 int TStack<T>::GetSize()
@@ -100,6 +101,28 @@ int TStack<T>::GetSize()
 template <class T>
 void TStack<T>::Print()
 {
-  for (int i = top ; i >=0; i-- )
-    cout <<"  {" <<mas[i] << "}\n";
+  for (int i = top; i >= 0; i--)
+    cout << "  {" << mas[i] << "}\n";
+}
+template <class T>
+int TStack<T>::GetTop()
+{
+  return top;
+}
+template <class T>
+void TStack<T>::Repack()
+{
+  if (IsFull())
+  {
+    T* temp = new T[size];
+    int _size = size * 2;
+    for (int i = 0; i < size; i++)
+      temp[i] = mas[i];
+    delete[]mas;
+    mas = new T[_size];
+    for (int i = 0; i < size; i++)
+      mas[i] = temp[i];
+    size = _size;
+    delete[]temp;
+  }
 }

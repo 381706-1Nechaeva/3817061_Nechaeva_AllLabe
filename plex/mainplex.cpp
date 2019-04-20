@@ -11,11 +11,16 @@ int main()
   R = new TPoint(2,2);
   B = new TPoint(3,3);
   E = new TPoint(4,4);
+  U = new TPoint(32, 2);
   A.Add(S, B);
   A.Add(B, E);  
   TPlex W(A);
   W.Add(R,E);
   W.Add(B, R);
+  W.Add(E,S);
+  W.Add(S, R);
+  W.Add(S, U);
+  W.Add(B, U);
   TPlex *Q = new TPlex(W);
   cout << "Рекурсивный\n";
   W.Show(Q);
