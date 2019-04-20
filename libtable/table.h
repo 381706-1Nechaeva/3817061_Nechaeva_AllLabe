@@ -54,8 +54,8 @@ void TTable<T>::Del(string _key)
   if (count == 0)
     throw TException("Table is empty");
   TElem<T>& temp = Find(_key);
-  if (tmp != not_find)
-    tmp = not_find;
+  if (temp != not_find)
+    temp = not_find;
 }
 template <class T>
 TElem<T>& TTable<T>::Find(string _key)
