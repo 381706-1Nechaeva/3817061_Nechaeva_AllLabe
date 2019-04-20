@@ -35,7 +35,7 @@ TTable<T>::TTable(TTable<T> &A)
 {
   size = A.size;
   count = A.count;
-  mas = new TElem[size];
+  mas = new TElem<T>[size];
   for (int i = 0; i < count; i++)
     mas[i] = A.mas[i];
 }
@@ -53,7 +53,7 @@ void TTable<T>::Del(string _key)
 {
   if (count == 0)
     throw TException("Table is empty");
-  TElem& temp = Find(_key);
+  TElem<T>& temp = Find(_key);
   if (tmp != not_find)
     tmp = not_find;
 }
