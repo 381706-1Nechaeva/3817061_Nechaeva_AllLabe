@@ -19,7 +19,6 @@ public:
 
   TElem<T>& operator=(TElem<T> &A);
   bool operator==(TElem<T> &A);
-  bool operator!=(TElem<T> &A);
 };
 template <class T>
 TElem<T>::TElem()
@@ -71,9 +70,4 @@ template <class T>
 T& TElem<T>::GetData()
 {
   return data;
-}
-template <class T>
-bool TElem<T>::operator!=(TElem<T> &A)
-{
-  return !(*this == A);
 }

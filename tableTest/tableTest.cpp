@@ -1,118 +1,60 @@
-#include "arrlist.h"
+#include "table.h"
 
 #include <gtest.h>
 
-TEST(TArrList, can_create_arrlist)
+TEST(TTable, can_create_table)
 {
-  ASSERT_NO_THROW(TArrList<int> a;);
+  ASSERT_NO_THROW(TTable<int> A);
 }
-TEST(TArrList, can_copy_arrlist)
+TEST(TTable, throw_when_negative_size)
 {
-  TArrList<int> a;
-  ASSERT_NO_THROW(TArrList<int> b(a););
+  ASSERT_ANY_THROW(TTable<int> A(-5));
 }
-TEST(TArrList, can_put_and_get_from_the_begin_arrlist)
+TEST(TTable, can_copy_table)
 {
-  TArrList<int> a;
-  a.PutBegin(3);
-  a.PutBegin(2);
-  EXPECT_EQ(2, a.GetBegin());
-  a.PutEnd(4);
-  EXPECT_EQ(4, a.GetEnd());
+  TTable<int> A(3);
+  ASSERT_NO_THROW(TTable<int> B(A));
 }
-TEST(TArrList, can_put_and_get_from_the_end_arrlist)
+TEST(TTable, can_get_size_of_table)
 {
-  TArrList<int> a;
-  a.PutBegin(3);
-  a.PutBegin(1);
-  EXPECT_EQ(3, a.GetEnd());
-  a.PutEnd(4);
-  EXPECT_EQ(4, a.GetEnd());
+  TTable<int> A(3);
+  EXPECT_EQ(3, A.GetSize());
 }
-TEST(TArrList, can_use_empty_check_true)
+TEST(TTable, can_get_count_of_table)
 {
-  TArrList<int> a;
-  ASSERT_TRUE(a.IsEmpty());
+  TTable<int> A(3);
+  A.Put("b", 4);
+  EXPECT_EQ(1, A.GetCount());
 }
-TEST(TArrList, throws_when_try_to_get_begin_into_empty_arrlist)
+TEST(TTable, can_set_size_of_table)
 {
-  TArrList<int> a;
-  ASSERT_ANY_THROW(a.GetBegin());
+  TTable<int> A(3);
+  A.Put("b", 4);
+  EXPECT_EQ(3, A.GetSize());
+  ASSERT_NO_THROW(A.SetSize(5));
+  EXPECT_EQ(1, A.GetCount());
+  EXPECT_EQ(5, A.GetSize());
 }
-TEST(TArrList, throws_when_try_to_get_end_into_empty_arrlist)
+TEST(TTable, can_put_and_get_data_on_table)
 {
-  TArrList<int> a;
-  ASSERT_ANY_THROW(a.GetEnd());
+  TTable<int> A(3);
+  ASSERT_NO_THROW(A.Put("b", 4));
+  EXPECT_EQ(4, A["b"]);
 }
-TEST(List, correct_empty_check)
+TEST(TTable, can_delete_element_on_table)
 {
-  TArrList<int> a;
-  a.PutBegin(3);
-  ASSERT_FALSE(a.IsEmpty());
+  TTable<int> A(3);
+  A.Put("b", 4);
+  ASSERT_NO_THROW(A.Del("b"));
 }
-TEST(TArrList, can_put_and_get_from_any_place)
+TEST(TTable, throw_when_put_element_on_full_table)
 {
-  TArrList<int> a;
-  a.PutBegin(3);
-  a.PutEnd(5);
-  a.PutTek(4, 1);
-  EXPECT_EQ(4, a.GetTek(1));
+  TTable<int> A(1);
+  A.Put("b", 4);
+  ASSERT_ANY_THROW(A.Put("d",3));
 }
-TEST(TArrList, throw_when_put_and_get_from_any_place_into_empty_arrlist)
+TEST(TTable, throw_when_delete_element_on_empty_table)
 {
-  TArrList<int> a;
-  ASSERT_ANY_THROW(a.GetTek(2));
+  TTable<int> A(1);
+  ASSERT_ANY_THROW(A.Del("d"));
 }
-TEST(TArrList, throw_when_put_and_get_from_any_place_with_negativ_number)
-{
-  TArrList<int> a;
-  a.PutBegin(3);
-  a.PutEnd(5);
-  ASSERT_ANY_THROW(a.PutTek(4, -2));
-  ASSERT_ANY_THROW(a.GetTek(-2));
-}
-TEST(TArrList, throw_when_put_and_get_from_any_place_with_large_number)
-{
-  TArrList<int> a;
-  a.PutBegin(3);
-  a.PutEnd(5);
-  ASSERT_ANY_THROW(a.PutTek(4, 4));
-  ASSERT_ANY_THROW(a.GetTek(4));
-}
-TEST(TArrList, throw_when_print_empty_arrlist)
-{
-  TArrList<int> a;
-  ASSERT_ANY_THROW(a.PrintArr());
-}
-TEST(TArrList, throw_when_put_in_begin_into_full_arrlist)
-{
-  TArrList<int> a(2);
-  a.PutBegin(12);
-  a.PutBegin(10);
-  ASSERT_ANY_THROW(a.PutBegin(2));
-}
-TEST(TArrList, throw_when_put_in_end_into_full_arrlist)
-{
-  TArrList<int> a(2);
-  a.PutBegin(12);
-  a.PutEnd(1);
-  ASSERT_ANY_THROW(a.PutEnd(2));
-}
-TEST(TArrList, throw_when_put_in_any_place_into_full_arrlist)
-{
-  TArrList<int> a(3);
-  a.PutBegin(12);
-  a.PutEnd(1);
-  a.PutTek(1, 1);
-  ASSERT_ANY_THROW(a.PutTek(10,1));
-}
-TEST(List, correct_full_check)
-{
-  TArrList<int> a(2);
-  a.PutBegin(3);
-  a.PutEnd(12);
-  ASSERT_TRUE(a.IsFull());
-  a.GetBegin();
-  ASSERT_FALSE(a.IsFull());
-}
-

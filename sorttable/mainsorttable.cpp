@@ -1,5 +1,5 @@
 ﻿#include <iostream>
-#include "table.h"
+#include "sorttable.h"
 
 int main() 
 {
