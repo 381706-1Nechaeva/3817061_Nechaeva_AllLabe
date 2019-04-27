@@ -151,8 +151,8 @@ T& TSortTable<T>::operator[](string k)
     T a;
     cout << "Enter the data:\n";
     cin >> a;
-    int T = Put(k,a);
-    return mas[T].GetData();
+    int i = Put(k,a);
+    return mas[i].GetData();
   }
   else return tmp.GetData();
 }
