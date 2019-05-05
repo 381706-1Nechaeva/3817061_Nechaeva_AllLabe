@@ -60,5 +60,5 @@ void TLine::SetB(TPoint _B)
 }
 void TLine::Show()
 {
-  cout << "Нарисован отрезок с координатами ( " << A.GetX() << " , " << A.GetY() << " ) ( " << B.GetX() << " , " << B.GetY() << " )\n";
+  cout << "  Нарисован отрезок с координатами ( " << A.GetX() << " , " << A.GetY() << " ) ( " << B.GetX() << " , " << B.GetY() << " )\n";
 }

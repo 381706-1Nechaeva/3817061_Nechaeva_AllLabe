@@ -73,7 +73,7 @@ void TPlex::Add(TPoint *_first, TPoint *_last)
       }
     }
     if (flag)
-      throw TException("Error line");
+    throw TException("Error line");
   }
 }
 //............................................
@@ -99,6 +99,8 @@ void TPlex::SetLast(TPoint *_last)
 //............................................
 TPoint* TPlex::Show(TPlex *p)
 {
+  if (p->first == 0 && p->last == 0)
+    throw TException("Plex is empty");
   TPlex *pl, *pr;
   TPoint *tl, *tr;
   TPoint *pp = NULL;
@@ -116,71 +118,11 @@ TPoint* TPlex::Show(TPlex *p)
   A.Show();
   return tl;
 }
-////............................................
-//void TPlex::Show()
-//{
-//  TStack<TPlex*> St;
-//  TPlex *pl, *pr;
-//  TPlex *p = this;
-//  TPoint *tl = NULL, *tr = NULL;
-//  St.Put(p);
-//  while (!St.IsEmpty())
-//  {
-//    p = St.Get();
-//    while (tr == NULL)
-//    {
-//      pr = dynamic_cast<TPlex*>(p->first);
-//      if (pr != NULL) //плекс, помещаем в стек
-//      {
-//        St.Put(p);
-//        p = dynamic_cast<TPlex*>(pr);
-//      }
-//      else
-//      {
-//        tr = p->first;
-//      }
-//    }
-//    if (tl == NULL)
-//    {
-//      pl = dynamic_cast<TPlex*>(p->last);
-//      if (pl != NULL) //снова плекс, помещаем стек и переходим к новому плексу
-//      {
-//        St.Put(p);
-//        p = dynamic_cast<TPlex*>(pl);
-//        tr = NULL;
-//        St.Put(p);
-//      }
-//      else
-//      {
-//        tl = p->last;
-//      }
-//    }
-//    if (tr != NULL && tl != NULL)
-//    {
-//      TLine A(*tl, *tr);
-//      A.Show();
-//      if (!St.IsEmpty())
-//      {
-//        p = St.Get();
-//        pr = dynamic_cast<TPlex*>(p->first);
-//        TPoint *pp = tl;
-//        if (pr != 0)
-//        {
-//          tr = pp;
-//          tl = NULL;
-//        }
-//        else
-//        {
-//          tl = pp;
-//          tr = NULL;
-//        }
-//        St.Put(p);
-//      }
-//    }
-//  }
-//}
+//............................................
 void TPlex::Show()
 {
+  if (first == 0 && last == 0)
+    throw TException("Plex is empty");
   TStack<TPlex*> St;
   TStack<TPoint*> point;
   TPlex *pl, *pr;
