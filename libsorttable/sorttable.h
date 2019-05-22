@@ -5,6 +5,7 @@ template <class T>
 class TSortTable
 {
 protected:
+  TElem<T> not_find;
   TElem<T> *mas;
   int size;
   int count; //кол-во исп элементов таблицы
