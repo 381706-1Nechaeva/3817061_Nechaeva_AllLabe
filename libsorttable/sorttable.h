@@ -5,7 +5,6 @@ template <class T>
 class TSortTable
 {
 protected:
-  TElem<T> not_find;
   TElem<T> *mas;
   int size;
   int count; //кол-во исп элементов таблицы
@@ -20,6 +19,7 @@ public:
   T& operator[](string k);
   int GetCount();
   int GetSize();
+  void Print();
 };
 //.........................................................
 template <class T>
@@ -167,4 +167,11 @@ template <class T>
 int TSortTable<T>::GetSize()
 {
   return size;
+}
+//........................................................
+template <class T>
+void TSortTable<T>::Print()
+{
+  for (int i = 0; i < count; i++)
+      cout << "  " << mas[i].GetKey() << " ----> " << mas[i].GetData() << "\n";
 }

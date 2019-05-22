@@ -20,6 +20,7 @@ public:
   void Del(string _key);
   TElem<T>& Find(string _key);
   T& operator[](string _key);
+  void Print();
 };
 template <class T>
 TTable<T>::TTable(int _size)
@@ -60,10 +61,13 @@ void TTable<T>::Del(string _key)
 template <class T>
 TElem<T>& TTable<T>::Find(string _key)
 {
+  int k = 1;
   for (int i = 0; i < count; i++)
+  {
     if (mas[i].GetKey() == _key)
       return mas[i];
-    else return not_find;
+  }
+  return not_find;
 }
 template <class T>
 T& TTable<T>::operator[](string _key)
@@ -104,7 +108,13 @@ int TTable<T>::GetCount()
 {
   return count;
 }
-
+template <class T>
+void TTable<T>::Print()
+{
+  for (int i = 0; i < count; i++)
+  if(mas[i]!=not_find)
+    cout <<"  "<< mas[i].GetKey() << " ----> " << mas[i].GetData() << "\n";
+}
 
 
 
