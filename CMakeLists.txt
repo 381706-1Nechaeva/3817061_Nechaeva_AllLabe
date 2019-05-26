@@ -13,13 +13,29 @@ set(libstack libstack)
 set(stackTest stackTest)
 set(stack stack)
 
+set(libtable libtable)
+set(tableTest tableTest)
+set(table table)
+
+set(libsorttable libsorttable)
+set(sorttableTest sorttableTest)
+set(sorttable sorttable)
+
 set(libpolinom libpolinom)
 set(polinomTest polinomTest)
 set(polinom polinom)
 
+set(libplex libplex)
+set(plexTest plexTest)
+set(plex plex)
+
 set(libstacklist libstacklist)
 set(stacklistTest stacklistTest)
 set(stacklist stacklist)
+
+#set(libtext libtext)
+#set(textTest textTest)
+#set(text text)
 
 set(libqueue libqueue)
 set(queueTest queueTest)
@@ -47,8 +63,8 @@ if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компиля
 endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/libvector ${CMAKE_CURRENT_SOURCE_DIR}/libstack ${CMAKE_CURRENT_SOURCE_DIR}/libqueue ${CMAKE_CURRENT_SOURCE_DIR}/libthrows ${CMAKE_CURRENT_SOURCE_DIR}/liblist
-${CMAKE_CURRENT_SOURCE_DIR}/libarrlist ${CMAKE_CURRENT_SOURCE_DIR}/libpolinom  
-${CMAKE_CURRENT_SOURCE_DIR}/libpostfix ${CMAKE_CURRENT_SOURCE_DIR}/libstacklist ${CMAKE_CURRENT_SOURCE_DIR}/libmultistack ${CMAKE_CURRENT_SOURCE_DIR}/gtest)
+${CMAKE_CURRENT_SOURCE_DIR}/libarrlist ${CMAKE_CURRENT_SOURCE_DIR}/libsorttable ${CMAKE_CURRENT_SOURCE_DIR}/libtable ${CMAKE_CURRENT_SOURCE_DIR}/libpolinom #${CMAKE_CURRENT_SOURCE_DIR}/libtext 
+${CMAKE_CURRENT_SOURCE_DIR}/libpostfix ${CMAKE_CURRENT_SOURCE_DIR}/libplex ${CMAKE_CURRENT_SOURCE_DIR}/libstacklist ${CMAKE_CURRENT_SOURCE_DIR}/libmultistack ${CMAKE_CURRENT_SOURCE_DIR}/gtest)
 
 
 add_subdirectory(vector)
@@ -58,6 +74,18 @@ add_subdirectory(vectorTest)
 add_subdirectory(postfix)
 add_subdirectory(libpostfix)
 add_subdirectory(postfixTest)
+
+add_subdirectory(plex)
+add_subdirectory(libplex)
+add_subdirectory(plexTest)
+
+add_subdirectory(table)
+add_subdirectory(libtable)
+add_subdirectory(tableTest)
+
+add_subdirectory(sorttable)
+add_subdirectory(libsorttable)
+add_subdirectory(sorttableTest)
 
 add_subdirectory(stack)
 add_subdirectory(libstack)
@@ -74,6 +102,11 @@ add_subdirectory(stacklistTest)
 add_subdirectory(queue)
 add_subdirectory(libqueue)
 add_subdirectory(queueTest)
+
+#add_subdirectory(libtext libtext)
+#add_subdirectory(textTest textTest)
+#add_subdirectory(text text)
+
 
 add_subdirectory(libthrows)
 
