@@ -17,9 +17,17 @@ set(libtable libtable)
 set(tableTest tableTest)
 set(table table)
 
+set(libhashlist libhashlist)
+set(hashlistTest hashlistTest)
+set(hashlist hashlist)
+
 set(libsorttable libsorttable)
 set(sorttableTest sorttableTest)
 set(sorttable sorttable)
+
+set(libtext libtext)
+set(textTest textTest)
+set(text text)
 
 set(libpolinom libpolinom)
 set(polinomTest polinomTest)
@@ -63,7 +71,7 @@ if(NOT CMAKE_BUILD_TYPE) # проверка имеющихся у компиля
 endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/libvector ${CMAKE_CURRENT_SOURCE_DIR}/libstack ${CMAKE_CURRENT_SOURCE_DIR}/libqueue ${CMAKE_CURRENT_SOURCE_DIR}/libthrows ${CMAKE_CURRENT_SOURCE_DIR}/liblist
-${CMAKE_CURRENT_SOURCE_DIR}/libarrlist ${CMAKE_CURRENT_SOURCE_DIR}/libsorttable ${CMAKE_CURRENT_SOURCE_DIR}/libtable ${CMAKE_CURRENT_SOURCE_DIR}/libpolinom #${CMAKE_CURRENT_SOURCE_DIR}/libtext 
+${CMAKE_CURRENT_SOURCE_DIR}/libarrlist ${CMAKE_CURRENT_SOURCE_DIR}/libhashlist ${CMAKE_CURRENT_SOURCE_DIR}/libtext ${CMAKE_CURRENT_SOURCE_DIR}/libsorttable ${CMAKE_CURRENT_SOURCE_DIR}/libtable ${CMAKE_CURRENT_SOURCE_DIR}/libpolinom #${CMAKE_CURRENT_SOURCE_DIR}/libtext 
 ${CMAKE_CURRENT_SOURCE_DIR}/libpostfix ${CMAKE_CURRENT_SOURCE_DIR}/libplex ${CMAKE_CURRENT_SOURCE_DIR}/libstacklist ${CMAKE_CURRENT_SOURCE_DIR}/libmultistack ${CMAKE_CURRENT_SOURCE_DIR}/gtest)
 
 
@@ -83,6 +91,10 @@ add_subdirectory(table)
 add_subdirectory(libtable)
 add_subdirectory(tableTest)
 
+add_subdirectory(libtext libtext)
+add_subdirectory(textTest textTest)
+add_subdirectory(text text)
+
 add_subdirectory(sorttable)
 add_subdirectory(libsorttable)
 add_subdirectory(sorttableTest)
@@ -90,6 +102,10 @@ add_subdirectory(sorttableTest)
 add_subdirectory(stack)
 add_subdirectory(libstack)
 add_subdirectory(stackTest)
+
+add_subdirectory(libhashlist libhashlist)
+add_subdirectory(hashlistTest hashlistTest)
+add_subdirectory(hashlist hashlist)
 
 add_subdirectory(polinom)
 add_subdirectory(libpolinom)
