@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "throws.h"
-#include "Stack.h"
+#include "stack.h"
 #include <string.h>
 
 class TNode {
