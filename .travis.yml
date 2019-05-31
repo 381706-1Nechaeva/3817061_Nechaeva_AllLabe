@@ -19,5 +19,6 @@ script:
   - ./table/table 
   - ./sorttable/sorttable 
   - ./hashlist/hashlist
+  - ./text/text
 notifications:
   email: false
