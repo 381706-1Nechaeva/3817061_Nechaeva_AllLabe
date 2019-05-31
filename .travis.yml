@@ -18,5 +18,6 @@ script:
   - ./plex/plex 
   - ./table/table 
   - ./sorttable/sorttable 
+  - ./hashlist/hashlist
 notifications:
   email: false
