@@ -91,9 +91,9 @@ add_subdirectory(table)
 add_subdirectory(libtable)
 add_subdirectory(tableTest)
 
-add_subdirectory(libtext libtext)
-add_subdirectory(textTest textTest)
-add_subdirectory(text text)
+add_subdirectory(libtext)
+add_subdirectory(textTest)
+add_subdirectory(text)
 
 add_subdirectory(sorttable)
 add_subdirectory(libsorttable)
@@ -118,10 +118,6 @@ add_subdirectory(stacklistTest)
 add_subdirectory(queue)
 add_subdirectory(libqueue)
 add_subdirectory(queueTest)
-
-#add_subdirectory(libtext libtext)
-#add_subdirectory(textTest textTest)
-#add_subdirectory(text text)
 
 
 add_subdirectory(libthrows)
