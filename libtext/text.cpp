@@ -227,24 +227,3 @@ int TText::FindIndex(char * a)
   }
   return -1;
 }
-
-ostream& operator<<(ostream& ostr, const TText &T)
-{
-  TNodeIter i(T.root);
-  for (int k = 0; k < 3; k++)
-  {
-    if (i()->GetNextLevel() == 0)
-      return ostr;
-    i++;
-  }
-  for (; !(i.IsEnd()); i++)
-  {
-    if ((i()->GetLevel() == 3) && (i()->GetData() != -1))
-      ostr << i()->GetData();
-    else if ((i()->GetLevel() == 2) && (i()->GetSosed() != 0) && (i()->GetLevel() != 0))
-      ostr << " ";
-    else if (i()->GetLevel() == 1)
-      ostr << endl;
-  }
-  return ostr;
-}

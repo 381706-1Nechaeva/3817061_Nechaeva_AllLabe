@@ -17,6 +17,5 @@ public:
   TNode* Find(char* a); // ïîèñê ñ âîçðàòîì óçëà
   int FindIndex(char* a); // ïîèñê ñ âîçâðàòîì íîìåðà áóêâû
   int GetCount();
-  friend ostream& operator<<(ostream& ostr, const TText &T);
 
 };
